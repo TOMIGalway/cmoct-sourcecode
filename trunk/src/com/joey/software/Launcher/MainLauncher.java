@@ -212,8 +212,11 @@ public class MainLauncher
 		SettingsLauncher.setActivePath(MainLauncher.class);
 
 		// Set the look and feel
+		try{
 		setLAF();
-
+		}catch(Exception e){
+			
+		}
 		// Test if administrator access is needed
 		if (!MainLauncher.checkReadWriteAccess())
 		{
