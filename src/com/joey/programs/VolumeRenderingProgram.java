@@ -15,9 +15,28 @@ import java.io.IOException;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import com.joey.software.Launcher.MainLauncher;
+import com.joey.software.j3dTookit.J3DDynamicLibLoader;
 
 public class VolumeRenderingProgram {
-	public static void main(String input[]) throws IOException, InterruptedException, ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException{
+	public static void main(String input[]) throws Exception{
+		
+		/*
+		 * If you keep getting out of memory errors add
+		 * 
+		 * Go to the menu : Run->Run Configurations
+		 * Click Arguments tab and in VM add
+		 * -Xmn100M -Xms500M -Xmx1024M (Add more to XMX if you have enough RAM)
+		 * 
+		 */
+		/**
+		 * This is a nice piece of code to automaically load the correct
+		 * library (x32 or x64) as required. 
+		 * 
+		 * This should be added to the start of any program that uses Java3d
+		 */
+		J3DDynamicLibLoader.loadDlls();
+		
+		//I didnt want to rewite the main class so i just call it from here. 
 		MainLauncher.main(input);
 	}
 
