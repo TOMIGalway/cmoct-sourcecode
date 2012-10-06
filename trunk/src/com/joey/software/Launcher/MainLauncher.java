@@ -215,7 +215,7 @@ public class MainLauncher
 		try{
 		setLAF();
 		}catch(Exception e){
-			
+			e.printStackTrace();
 		}
 		// Test if administrator access is needed
 		if (!MainLauncher.checkReadWriteAccess())
