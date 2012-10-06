@@ -14,15 +14,14 @@ The url is https://cmoct-sourcecode.googlecode.com/svn/trunk/
 Everything else should be fine, just click ok, 
 It will then checkout the source code.
 
-(6) Download and install eclipse and Java JDK
-Once you have started eclipse, click File, Import
-Under General select Existing Project Into Workspace
+(6) Download and install eclipse and Java JDK.
+Once you have started eclipse, click File, Import.
+Under General select Existing Project Into Workspace.
 In root directory select the directory where you checked out your code (c:\project\Cmoct Project)
 It should detect the project (if not click the white area under Porjects) then click Finish. 
-You should now have the code in your project, the two entry points are
-under 
+You should now have the code in your project, the two entry points are under 
 src-com-joey-programs
 
-There is CrossCorellationAnalysis.java and VolumeRenderingProgram.java
-
-Anyhow both should start now and I think that they are working fine. 
+There is 
+CrossCorellationAnalysis.java (Main cmOCT) program 
+VolumeRenderingProgram.java (3D volume rendering software)
