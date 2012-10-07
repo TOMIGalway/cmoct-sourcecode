@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import javax.swing.UnsupportedLookAndFeelException;
 
+import com.joey.software.Launcher.MainLauncher;
 import com.joey.software.MultiThreadCrossCorrelation.CrossCorrProgram;
 import com.joey.software.j3dTookit.J3DDynamicLibLoader;
 
@@ -38,6 +39,12 @@ public class CrossCorrelationAnalysis {
 		 */
 		J3DDynamicLibLoader.loadDlls();
 		
+		//This sets the look of feels
+		try{
+			MainLauncher.setLAF();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		//I didnt want to rewite the main class so i just call it from here. 
 		CrossCorrProgram.main(input);

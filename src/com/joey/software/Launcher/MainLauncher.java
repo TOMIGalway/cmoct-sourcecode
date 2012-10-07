@@ -47,7 +47,7 @@ public class MainLauncher
 
 	public static void setLAF() throws IOException
 	{
-
+		SettingsLauncher.setActivePath(MainLauncher.class);
 		EditableLAFControler laf = new EditableLAFControler(
 				SettingsLauncher.getPath() + "\\LAF\\");
 		laf.updateLAF(SettingsLauncher.readLAF(SettingsLauncher.getPath()
@@ -209,7 +209,7 @@ public class MainLauncher
 			testing(raw, prv);
 			return;
 		}
-		SettingsLauncher.setActivePath(MainLauncher.class);
+		
 
 		// Set the look and feel
 		try{
