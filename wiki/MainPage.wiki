@@ -1,1 +1,0 @@
-This project is just a dump of my java source code. It contains many different tools and function.
