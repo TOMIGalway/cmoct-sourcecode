@@ -1,5 +1,5 @@
 *  [NotYetDone Getting Started]
-*User Guide 
+*  User Guide 
   *  [NotYetDone Installing Preresquites]
   *  [NotYetDone Installisation]
   *  [NotYetDone Running]
