@@ -1,4 +1,4 @@
-*[NotYetDone Welcome]
+
 *User Guide
   *[NotYetDone Title1]
   *[NotYetDone Title2]
