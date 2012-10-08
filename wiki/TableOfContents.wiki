@@ -1,9 +1,9 @@
 *[NotYetDone Welcome]
 *User Guide
-  *[NotYetDone How To Run the Program]
-  *[NotYetDone How To Run the Program 1]
-  *[NotYetDone How To Run the Program 2]
-  *[NotYetDone How To Run the Program 2]
+  * [NotYetDone Title1]
+  * [NotYetDone Title2]
+  * [NotYetDone Title3]
+  * [NotYetDone Title4]
 *Devoloper Guide
   *[NotYetDone Downloading And Running from Source Code]
   *[NotYetDone Creating Custom Input Format]
