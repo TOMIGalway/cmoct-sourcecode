@@ -32,7 +32,7 @@ public class CrossCorrelationAnalysis {
 		
 		
 		/**
-		 * This is a nice piece of code to automaically load the correct
+		 * This is a nice piece of code to automatically load the correct
 		 * library (x32 or x64) as required. 
 		 * 
 		 * This should be added to the start of any program that uses Java3d
