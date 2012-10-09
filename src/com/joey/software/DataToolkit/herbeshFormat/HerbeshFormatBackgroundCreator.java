@@ -63,7 +63,6 @@ public class HerbeshFormatBackgroundCreator extends JPanel
 	}
 	
 	
-	@Override
 	public BufferedImage getImage(int pos) throws IOException
 	{
 		DataInputStream in = new DataInputStream(new BufferedInputStream(

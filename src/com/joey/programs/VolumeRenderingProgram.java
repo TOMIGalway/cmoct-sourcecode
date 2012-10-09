@@ -36,7 +36,7 @@ public class VolumeRenderingProgram {
 		 */
 		J3DDynamicLibLoader.loadDlls();
 		
-		//I didnt want to rewite the main class so i just call it from here. 
+		//I didnt want to rewrite the main class so i just call it from here. 
 		MainLauncher.main(input);
 	}
 
