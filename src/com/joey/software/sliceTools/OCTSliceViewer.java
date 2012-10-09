@@ -10,7 +10,6 @@
  ******************************************************************************/
 package com.joey.software.sliceTools;
 
-
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -84,7 +83,6 @@ import com.joey.software.regionSelectionToolkit.controlers.ImageProfileTool;
 import com.joey.software.regionSelectionToolkit.controlers.LineControler;
 import com.joey.software.regionSelectionToolkit.controlers.PolygonControler;
 
-
 /**
  * This code was edited or generated using CloudGarden's Jigloo SWT/Swing GUI
  * Builder, which is free for non-commercial use. If Jigloo is being used
@@ -97,11 +95,9 @@ import com.joey.software.regionSelectionToolkit.controlers.PolygonControler;
  */
 public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		MouseListener, ChangeListener, ActionListener, Externalizable,
-		ROIPanelListner
-{
+		ROIPanelListner {
 
-	public static void main(String[] input) throws IOException
-	{
+	public static void main(String[] input) throws IOException {
 		File dataFile = new File("c:\\test\\micro\\raw.dat");
 		File previewFile = new File("c:\\test\\micro\\prv.dat");
 
@@ -111,70 +107,6 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		panel.setOCTData(octData);
 
 		FrameFactroy.getFrame(panel);
-		// final MemoryUsagePanel u = new MemoryUsagePanel(500, 100);
-		// JFrame f = new JFrame("Memory Usage");
-		// f.setLayout(new BorderLayout());
-		// f.getContentPane().add(u, BorderLayout.CENTER);
-		// f.setSize(800, 400);
-		// f.setVisible(true);
-		// JButton clear = new JButton("Clear");
-		// clear.addActionListener(new ActionListener()
-		// {
-		//
-		// boolean loaded = true;
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent e)
-		// {
-		// if (loaded)
-		// {
-		// try
-		// {
-		// loaded = false;
-		// panel.unloadData();
-		// } catch (IOException e1)
-		// {
-		// // TODO Auto-generated catch block
-		// e1.printStackTrace();
-		// }
-		// } else
-		// {
-		// loaded = true;
-		// panel.reloadData();
-		// }
-		// }
-		// });
-		//
-		// JButton garbage = new JButton("Running");
-		// garbage.addActionListener(new ActionListener()
-		// {
-		//
-		// boolean running = false;
-		//
-		// @Override
-		// public void actionPerformed(ActionEvent e)
-		// {
-		// if (running)
-		// {
-		// running = false;
-		// u.stopUpdating();
-		// } else
-		// {
-		// running = true;
-		// u.startUpdating();
-		// }
-		// }
-		// });
-		//
-		// JPanel temp = new JPanel(new GridLayout(1, 2));
-		// temp.add(clear);
-		// temp.add(garbage);
-		//
-		// f.getContentPane().add(temp, BorderLayout.SOUTH);
-		// UserChoiceColorMap user = new UserChoiceColorMap();
-		// user.updateVolumeData(octData.getPreviewData());
-		// FrameFactroy.getFrame(user.getUserSelectionPanel());
-
 	}
 
 	NumberFormat numformat = NumberFormat.getInstance();
@@ -208,13 +140,11 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 	JTabbedPane controlTabPanel = new JTabbedPane();
 
-	JSpinner projectNumber = new JSpinner(new SpinnerNumberModel(0, -1000, 1000,
-			1));
+	JSpinner projectNumber = new JSpinner(new SpinnerNumberModel(0, -1000,1000, 1));
 
 	boolean allowProjection = false;
 
-	JComboBox projectType = new JComboBox(new String[]
-	{ "None", "Avg", "Min", "Max" });
+	JComboBox projectType = new JComboBox(new String[] { "None", "Avg", "Max","Min" });
 
 	boolean mouseDragging = false;
 
@@ -277,11 +207,9 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 	boolean blockFreeSliceUpdate = false;
 
-	JSpinner freeSliceDepthStart = new JSpinner(new SpinnerNumberModel(0, 0,
-			Integer.MAX_VALUE, 1));
+	JSpinner freeSliceDepthStart = new JSpinner(new SpinnerNumberModel(0, 0,Integer.MAX_VALUE, 1));
 
-	JSpinner freeSliceDepthEnd = new JSpinner(new SpinnerNumberModel(0, 0,
-			Integer.MAX_VALUE, 1));
+	JSpinner freeSliceDepthEnd = new JSpinner(new SpinnerNumberModel(0, 0,Integer.MAX_VALUE, 1));
 
 	JFrame freeSliceFrame = null;
 
@@ -291,11 +219,9 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 	JCheckBox freeSliceRealTimeUpdate = new JCheckBox("Real Update");
 
-	JSpinner freeSliceProjectNumber = new JSpinner(new SpinnerNumberModel(0,
-			-100, 100, 1));
+	JSpinner freeSliceProjectNumber = new JSpinner(new SpinnerNumberModel(0,-100, 100, 1));
 
-	JComboBox freeSliceProjectType = new JComboBox(new String[]
-	{ "Avg", "Max", "Min", "Custom" });
+	JComboBox freeSliceProjectType = new JComboBox(new String[] { "None", "Avg","Min", "Max" });
 
 	JButton saveFreeSliceProjectImage = new JButton("Save Image");
 
@@ -372,8 +298,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 	boolean blockUpdate = false;
 
-	public OCTSliceViewer()
-	{
+	public OCTSliceViewer() {
 
 		super();
 
@@ -394,12 +319,10 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		noMeasureOverlay.setVisible(false);
 
 		previewPanel.setHighQualityRenderingEnabled(true);
-		try
-		{
+		try {
 			NativeDataSet data = new NativeDataSet();
 			setOCTData(data);
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -408,43 +331,34 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 	}
 
-	public void setDataSetPanel(OCTDataSetPanel data)
-	{
+	public void setDataSetPanel(OCTDataSetPanel data) {
 		this.dataSetPanel = data;
 	}
 
-	public void unloadData()
-	{
+	public void unloadData() {
 		previewPanel.setImage(ImageOperations.getBi(1));
 		setVisible(false);
 	}
 
-	public void reloadData()
-	{
+	public void reloadData() {
 		updatePreviewPanel(renderHighRes.isSelected());
 		setVisible(true);
 		repaint();
 	}
 
-	public LineControler getLineMeasureTool()
-	{
-		if (getPreviewAxes() == NativeDataSet.X_SLICE)
-		{
+	public LineControler getLineMeasureTool() {
+		if (getPreviewAxes() == NativeDataSet.X_SLICE) {
 			return xLineMeasure;
-		} else if (getPreviewAxes() == NativeDataSet.Y_SLICE)
-		{
+		} else if (getPreviewAxes() == NativeDataSet.Y_SLICE) {
 			return yLineMeasure;
-		} else if (getPreviewAxes() == NativeDataSet.Z_SLICE)
-		{
+		} else if (getPreviewAxes() == NativeDataSet.Z_SLICE) {
 			return zLineMeasure;
-		} else
-		{
+		} else {
 			throw new InvalidParameterException("Error- not real axis");
 		}
 	}
 
-	public void createJPanel()
-	{
+	public void createJPanel() {
 		/**
 		 * Create the slice selector
 		 */
@@ -469,11 +383,11 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		JPanel controlPanel = new JPanel(new BorderLayout());
 		controlPanel.setBorder(BorderFactory.createTitledBorder(""));
 
-		SwingToolkit.createPanel(new String[]
-		{ "Show Lines : ", "Continous :", "High Res : ", "Color Map :",
-				"Export Frame :", }, new JComponent[]
-		{ lineTool, continousSliderUpdate, renderHighRes, colorMapButton,
-				exportFrame }, 80, controlPanel);
+		SwingToolkit.createPanel(new String[] { "Show Lines : ", "Continous :",
+				"High Res : ", "Color Map :", "Export Frame :", },
+				new JComponent[] { lineTool, continousSliderUpdate,
+						renderHighRes, colorMapButton, exportFrame }, 80,
+				controlPanel);
 
 		JPanel contPanel = new JPanel(new BorderLayout());
 		contPanel.add(controlPanel, BorderLayout.NORTH);
@@ -656,16 +570,11 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		 */
 
 		JPanel freeSlicePanel = new JPanel(new GridLayout(6, 1));
-		freeSlicePanel.add(SwingToolkit
-				.getLabel(freeSliceDepthStart, "Start :", 50));
-		freeSlicePanel.add(SwingToolkit
-				.getLabel(freeSliceDepthEnd, "End :", 50));
-		freeSlicePanel.add(SwingToolkit
-				.getLabel(freeSliceProjectType, "Type :", 50));
-		freeSlicePanel.add(SwingToolkit
-				.getLabel(freeSliceProjectNumber, "Num :", 50));
-		freeSlicePanel.add(SwingToolkit
-				.getLabel(saveFreeSliceProjectImage, "Save :", 50));
+		freeSlicePanel.add(SwingToolkit.getLabel(freeSliceDepthStart,"Start :", 50));
+		freeSlicePanel.add(SwingToolkit.getLabel(freeSliceDepthEnd, "End :", 50));
+		freeSlicePanel.add(SwingToolkit.getLabel(freeSliceProjectType,"Type :", 50));
+		freeSlicePanel.add(SwingToolkit.getLabel(freeSliceProjectNumber,"Num :", 50));
+		freeSlicePanel.add(SwingToolkit.getLabel(saveFreeSliceProjectImage,"Save :", 50));
 		freeSlicePanel.add(SwingToolkit.getLabel(showFreeSlice, "Show :", 50));
 		JPanel freeSlicePanelHolder = new JPanel(new BorderLayout());
 		freeSlicePanelHolder.add(freeSlicePanel, BorderLayout.NORTH);
@@ -678,54 +587,46 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		controlTabPanel.addTab("Measure", measurePanel);
 		controlTabPanel.addTab("Tool", toolTab);
 
-		saveFreeSliceProjectImage.addActionListener(new ActionListener()
-		{
+		saveFreeSliceProjectImage.addActionListener(new ActionListener() {
 			FileSelectionField save = new FileSelectionField();
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 
 				save.setType(FileSelectionField.TYPE_SAVE_FILE);
-				save
-						.setFormat(FileSelectionField.FORMAT_IMAGE_FILES_SHOW_FORMAT);
+				save.setFormat(FileSelectionField.FORMAT_IMAGE_FILES_SHOW_FORMAT);
 
-				if (save.getUserChoice())
-				{
-					try
-					{
+				if (save.getUserChoice()) {
+					try {
 						File f = save.getFile();
 
-						ImageIO.write(OCTSliceViewer.this.freeSlicePanel
-								.getImage(), FileOperations.splitFile(f)[2], f);
-					} catch (Exception ee)
-					{
-						JOptionPane
-								.showMessageDialog(null, "Error Saving Image : "
+						ImageIO.write(
+								OCTSliceViewer.this.freeSlicePanel.getImage(),
+								FileOperations.splitFile(f)[2], f);
+					} catch (Exception ee) {
+						JOptionPane.showMessageDialog(
+								null,
+								"Error Saving Image : "
 										+ ee.getLocalizedMessage());
 					}
 				}
 
 			}
 		});
-		ChangeListener freeSliceChange = new ChangeListener()
-		{
+		ChangeListener freeSliceChange = new ChangeListener() {
 
 			@Override
-			public void stateChanged(ChangeEvent e)
-			{
+			public void stateChanged(ChangeEvent e) {
 				updateFreeSlice();
 			}
 		};
 		freeSliceDepthEnd.addChangeListener(freeSliceChange);
 		freeSliceDepthStart.addChangeListener(freeSliceChange);
 		freeSliceProjectNumber.addChangeListener(freeSliceChange);
-		freeSliceProjectType.addActionListener(new ActionListener()
-		{
+		freeSliceProjectType.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				OCTSliceViewer.this.freeSlicePanel
 						.setImage(freeSliceData[freeSliceProjectType
 								.getSelectedIndex()]);
@@ -733,22 +634,18 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 			}
 		});
 
-		showFreeSlice.addActionListener(new ActionListener()
-		{
+		showFreeSlice.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				updateFreeSlice();
 
 			}
 		});
-		showProjection.addActionListener(new ActionListener()
-		{
+		showProjection.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				updatePreviewPanel(renderHighRes.isSelected());
 
 			}
@@ -757,11 +654,9 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		 * 
 		 * This is were the tools are switched
 		 */
-		ChangeListener change = new ChangeListener()
-		{
+		ChangeListener change = new ChangeListener() {
 			@Override
-			public void stateChanged(ChangeEvent e)
-			{
+			public void stateChanged(ChangeEvent e) {
 				updateToolOverlay();
 			}
 		};
@@ -785,8 +680,8 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		previewScroll.add(previewPanel.getHorScroll(), BorderLayout.SOUTH);
 		previewScroll.add(previewPanel.getVerScroll(), BorderLayout.EAST);
 		JPanel rightPanel = new JPanel(new BorderLayout());
-		rightPanel
-				.add(previewPanel.getImageInformationPanel(), BorderLayout.SOUTH);
+		rightPanel.add(previewPanel.getImageInformationPanel(),
+				BorderLayout.SOUTH);
 		rightPanel.add(previewScroll, BorderLayout.CENTER);
 
 		JSplitPane splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -823,73 +718,59 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 		previewPanel.addROIPanelListner(this);
 
-		lineTransparency.addChangeListener(new ChangeListener()
-		{
+		lineTransparency.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(ChangeEvent e)
-			{
+			public void stateChanged(ChangeEvent e) {
 				updatePreviewPanel(renderHighRes.isSelected());
 			}
 		});
 
-		measureTransparency.addChangeListener(new ChangeListener()
-		{
+		measureTransparency.addChangeListener(new ChangeListener() {
 
 			@Override
-			public void stateChanged(ChangeEvent e)
-			{
+			public void stateChanged(ChangeEvent e) {
 				previewPanel.setAlpha((float) measureTransparency.getValue()
 						/ (float) measureTransparency.getMaximum());
 				updatePreviewPanel(renderHighRes.isSelected());
 			}
 		});
 
-		renderHighRes.addItemListener(new ItemListener()
-		{
+		renderHighRes.addItemListener(new ItemListener() {
 
 			@Override
-			public void itemStateChanged(ItemEvent e)
-			{
-				if (isUpdateAllowed())
-				{
+			public void itemStateChanged(ItemEvent e) {
+				if (isUpdateAllowed()) {
 
 					// Correct the scale points when change happends
 					double scaleX = 0;
 					double scaleY = 0;
-					if (getPreviewAxes() == NativeDataSet.X_SLICE)
-					{
+					if (getPreviewAxes() == NativeDataSet.X_SLICE) {
 						scaleX = data.getPreviewScaleZ();
 						scaleY = data.getPreviewScaleY();
 
-					} else if (getPreviewAxes() == NativeDataSet.Y_SLICE)
-					{
+					} else if (getPreviewAxes() == NativeDataSet.Y_SLICE) {
 						scaleX = data.getPreviewScaleX();
 						scaleY = data.getPreviewScaleZ();
-					} else if (getPreviewAxes() == NativeDataSet.Z_SLICE)
-					{
+					} else if (getPreviewAxes() == NativeDataSet.Z_SLICE) {
 						scaleX = data.getPreviewScaleZ();
 						scaleY = data.getPreviewScaleY();
 					}
 
-					if (!renderHighRes.isSelected())
-					{
+					if (!renderHighRes.isSelected()) {
 						scaleX = 1 / scaleX;
 						scaleY = 1 / scaleY;
 					}
 
-					for (Point2D.Double p : xLineMeasure.points)
-					{
+					for (Point2D.Double p : xLineMeasure.points) {
 						p.x *= scaleX;
 						p.y *= scaleY;
 					}
-					for (Point2D.Double p : yLineMeasure.points)
-					{
+					for (Point2D.Double p : yLineMeasure.points) {
 						p.x *= scaleX;
 						p.y *= scaleY;
 					}
-					for (Point2D.Double p : zLineMeasure.points)
-					{
+					for (Point2D.Double p : zLineMeasure.points) {
 						p.x *= scaleX;
 						p.y *= scaleY;
 					}
@@ -899,32 +780,26 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 			}
 		});
 
-		showPositionLines.addActionListener(new ActionListener()
-		{
+		showPositionLines.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				updatePreviewPanel(renderHighRes.isSelected());
 			}
 		});
-		exportFrame.addActionListener(new ActionListener()
-		{
+		exportFrame.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				exportCurrentFrame();
 
 			}
 		});
 
-		updateField.addActionListener(new ActionListener()
-		{
+		updateField.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e)
-			{
+			public void actionPerformed(ActionEvent e) {
 				updateMeasurement(true);
 			}
 		});
@@ -936,21 +811,17 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	 * @return
 	 */
 
-	public double getLineMeasureX()
-	{
+	public double getLineMeasureX() {
 		return getLineMeasureX(false);
 	}
 
-	public double getLineMeasureX(boolean update)
-	{
+	public double getLineMeasureX(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeZ();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeZ();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -964,8 +835,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 		int power = data.getPowerX();
 
-		if (update)
-		{
+		if (update) {
 			// xDxField.setText(numformat.format(Math.abs(dx)));
 			// xDyField.setText(numformat.format(Math.abs(dy)));
 			// xSizeField.setText(numformat.format(val));
@@ -978,21 +848,17 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		return val;
 	}
 
-	public double getLineMeasureY()
-	{
+	public double getLineMeasureY() {
 		return getLineMeasureY(false);
 	}
 
-	public double getLineMeasureY(boolean update)
-	{
+	public double getLineMeasureY(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeZ();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeZ();
 		}
@@ -1006,8 +872,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 		int power = data.getPowerY();
 
-		if (update)
-		{
+		if (update) {
 			yDxField.setText(NumberDimension.getValue(dx, power, "m"));
 			yDyField.setText(NumberDimension.getValue(dy, power, "m"));
 			ySizeField.setText(NumberDimension.getValue(val, power, "m"));
@@ -1015,21 +880,17 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		return val;
 	}
 
-	public double getLineMeasureZ()
-	{
+	public double getLineMeasureZ() {
 		return getLineMeasureZ(false);
 	}
 
-	public double getPathMeasureX(boolean update)
-	{
+	public double getPathMeasureX(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeZ();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeZ();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -1039,25 +900,21 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getPathLength(path, scaleX, scaleY);
 
 		int power = data.getPowerX();
-		if (update)
-		{
-			xPathPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl"));
+		if (update) {
+			xPathPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl"));
 			xPathSizeField.setText(NumberDimension.getValue(size, power, "m"));
 		}
 		return size;
 	}
 
-	public double getPathMeasureY(boolean update)
-	{
+	public double getPathMeasureY(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeZ();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeZ();
 		}
@@ -1067,25 +924,21 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getPathLength(path, scaleX, scaleY);
 
 		int power = data.getPowerY();
-		if (update)
-		{
-			yPathPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl"));
+		if (update) {
+			yPathPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl"));
 			yPathSizeField.setText(NumberDimension.getValue(size, power, "m"));
 		}
 		return size;
 	}
 
-	public double getPathMeasureZ(boolean update)
-	{
+	public double getPathMeasureZ(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -1095,25 +948,21 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getPathLength(path, scaleX, scaleY);
 
 		int power = data.getPowerZ();
-		if (update)
-		{
-			zPathPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl"));
+		if (update) {
+			zPathPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl"));
 			zPathSizeField.setText(NumberDimension.getValue(size, power, "m"));
 		}
 		return size;
 	}
 
-	public double getAreaMeasureX(boolean update)
-	{
+	public double getAreaMeasureX(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeZ();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeZ();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -1123,26 +972,22 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getArea(path, scaleX, scaleY);
 
 		int power = data.getPowerX();
-		if (update)
-		{
-			xAreaPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl\u00b2"));
-			xAreaSizeField.setText(NumberDimension
-					.getValue(size, power, "m\u00b2"));
+		if (update) {
+			xAreaPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl\u00b2"));
+			xAreaSizeField.setText(NumberDimension.getValue(size, power,
+					"m\u00b2"));
 		}
 		return size;
 	}
 
-	public double getAreaMeasureY(boolean update)
-	{
+	public double getAreaMeasureY(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeZ();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeZ();
 		}
@@ -1152,26 +997,22 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getArea(path, scaleX, scaleY);
 
 		int power = data.getPowerY();
-		if (update)
-		{
-			yAreaPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl\u00b2"));
-			yAreaSizeField.setText(NumberDimension
-					.getValue(size, power, "m\u00b2"));
+		if (update) {
+			yAreaPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl\u00b2"));
+			yAreaSizeField.setText(NumberDimension.getValue(size, power,
+					"m\u00b2"));
 		}
 		return size;
 	}
 
-	public double getAreaMeasureZ(boolean update)
-	{
+	public double getAreaMeasureZ(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -1181,26 +1022,22 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double size = GeomertyToolkit.getArea(path, scaleX, scaleY);
 
 		int power = data.getPowerZ();
-		if (update)
-		{
-			zAreaPxlField.setText(NumberDimension
-					.getValue(pxl, NumberDimension.POWER_UNITY, "pxl\u00b2"));
-			zAreaSizeField.setText(NumberDimension
-					.getValue(size, power, "m\u00b2"));
+		if (update) {
+			zAreaPxlField.setText(NumberDimension.getValue(pxl,
+					NumberDimension.POWER_UNITY, "pxl\u00b2"));
+			zAreaSizeField.setText(NumberDimension.getValue(size, power,
+					"m\u00b2"));
 		}
 		return size;
 	}
 
-	public double getLineMeasureZ(boolean update)
-	{
+	public double getLineMeasureZ(boolean update) {
 		double scaleX = 1;
 		double scaleY = 1;
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			scaleX = data.getPixelSizeX();
 			scaleY = data.getPixelSizeY();
-		} else
-		{
+		} else {
 			scaleX = data.getPreviewPixelSizeX();
 			scaleY = data.getPreviewPixelSizeY();
 		}
@@ -1214,8 +1051,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		double val = Math.sqrt(dx * dx + dy * dy);
 
 		int power = data.getPowerZ();
-		if (update)
-		{
+		if (update) {
 			zDxField.setText(NumberDimension.getValue(dx, power, "m"));
 			zDyField.setText(NumberDimension.getValue(dy, power, "m"));
 			zSizeField.setText(NumberDimension.getValue(val, power, "m"));
@@ -1223,17 +1059,13 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		return val;
 	}
 
-	public void updateMeasurement()
-	{
+	public void updateMeasurement() {
 		updateMeasurement(false);
 	}
 
-	public void updateMeasurement(boolean updateAll)
-	{
-		try
-		{
-			if (updateAll)
-			{
+	public void updateMeasurement(boolean updateAll) {
+		try {
+			if (updateAll) {
 				getLineMeasureX(true);
 				getLineMeasureY(true);
 				getLineMeasureZ(true);
@@ -1243,101 +1075,86 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				getAreaMeasureX(true);
 				getAreaMeasureY(true);
 				getAreaMeasureZ(true);
-			} else if (controlTabPanel.getSelectedIndex() == 0)
-			{// No Overlay
+			} else if (controlTabPanel.getSelectedIndex() == 0) {// No Overlay
 
-			} else if (controlTabPanel.getSelectedIndex() == 1)
-			{
-				if (measureTab.getSelectedIndex() == 0)
-				{// Line Measure
+			} else if (controlTabPanel.getSelectedIndex() == 1) {
+				if (measureTab.getSelectedIndex() == 0) {// Line Measure
 					getLineMeasureX(true);
 					getLineMeasureY(true);
 					getLineMeasureZ(true);
-				} else if (measureTab.getSelectedIndex() == 1)
-				{// Path Measure
+				} else if (measureTab.getSelectedIndex() == 1) {// Path Measure
 					getPathMeasureX(true);
 					getPathMeasureY(true);
 					getPathMeasureZ(true);
-				} else if (measureTab.getSelectedIndex() == 2)
-				{// Area Measure
+				} else if (measureTab.getSelectedIndex() == 2) {// Area Measure
 					getAreaMeasureX(true);
 					getAreaMeasureY(true);
 					getAreaMeasureZ(true);
 
 				}
-			} else if (controlTabPanel.getSelectedIndex() == 2)
-			{
+			} else if (controlTabPanel.getSelectedIndex() == 2) {
 				// Free slice panel
-				if (toolTab.getSelectedIndex() == 2)
-				{
-					if (freeSliceRealTimeUpdate.isSelected())
-					{
+				if (toolTab.getSelectedIndex() == 2) {
+					if (freeSliceRealTimeUpdate.isSelected()) {
 						updateFreeSlice();
 					}
 				}
 			}
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println("There was an error updating measure");
 			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
 	}
 
-	public boolean isUpdateAllowed()
-	{
+	public boolean isUpdateAllowed() {
 		return updateAllowed;
 	}
 
-	public void setUpdateAllowed(boolean allow)
-	{
+	public void setUpdateAllowed(boolean allow) {
 		this.updateAllowed = allow;
 	}
 
 	FileSelectionField exportCurrentFrame = new FileSelectionField();
 
-	public void exportCurrentFrame()
-	{
-		try
-		{
+	public void exportCurrentFrame() {
+		try {
 
 			exportCurrentFrame.setLabelSize(50);
 			exportCurrentFrame
 					.setFormat(FileSelectionField.FORMAT_IMAGE_FILES_SHOW_FORMAT);
-			if (exportCurrentFrame.getUserChoice())
-			{
+			if (exportCurrentFrame.getUserChoice()) {
 
-				if (JOptionPane
-						.showConfirmDialog(null, "The file already exist, Overwrite?", "Confirm Overwrite?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == JOptionPane.CANCEL_OPTION)
-				{
+				if (JOptionPane.showConfirmDialog(null,
+						"The file already exist, Overwrite?",
+						"Confirm Overwrite?", JOptionPane.YES_NO_OPTION,
+						JOptionPane.PLAIN_MESSAGE) == JOptionPane.CANCEL_OPTION) {
 					return;
 				}
 				exportCurrentFrame(exportCurrentFrame.getFile());
 			}
-		} catch (IOException e1)
-		{
-			JOptionPane
-					.showMessageDialog(null, "There was an error saving the frame : \n"
-							+ e1.getLocalizedMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e1) {
+			JOptionPane.showMessageDialog(
+					null,
+					"There was an error saving the frame : \n"
+							+ e1.getLocalizedMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
 
 	}
 
-	public void exportCurrentFrame(File f) throws IOException
-	{
+	public void exportCurrentFrame(File f) throws IOException {
 		exportCurrentFrame(f, false);
 	}
 
 	public void exportCurrentFrame(File f, boolean showOverlay)
-			throws IOException
-	{
+			throws IOException {
 		ImageIO.write(previewPanel.getImage(), Utils.getExtension(f), f);
 	}
 
-	public void setOCTData(NativeDataSet data)
-	{
+	public void setOCTData(NativeDataSet data) {
 		this.data = data;
 		xSlicePanel.setOCTData(data, NativeDataSet.X_SLICE);
 		ySlicePanel.setOCTData(data, NativeDataSet.Y_SLICE);
@@ -1346,11 +1163,9 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		setPreviewAxes(NativeDataSet.X_SLICE);
 		previewPos = 0;
 
-		if (data.isAllowFullResolution())
-		{
+		if (data.isAllowFullResolution()) {
 			renderHighRes.setEnabled(true);
-		} else
-		{
+		} else {
 			renderHighRes.setSelected(false);
 			renderHighRes.setEnabled(false);
 		}
@@ -1360,30 +1175,29 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	/**
 	 * This function will draw the current slice and display the frame
 	 */
-	public void updateFreeSlice()
-	{
-		if (blockFreeSliceUpdate)
-		{
+	public void updateFreeSlice() {
+		if (blockFreeSliceUpdate) {
 			return;
 		}
 		Color maxCol = new Color(1f, 0, 0);
 		Color minCol = new Color(0, 0, 1f);
-		int sPos = DataAnalysisToolkit.getMin((Integer) freeSliceDepthStart
-				.getValue(), (Integer) freeSliceDepthEnd.getValue());
-		int ePos = DataAnalysisToolkit.getMax((Integer) freeSliceDepthStart
-				.getValue(), (Integer) freeSliceDepthEnd.getValue());
+		int sPos = DataAnalysisToolkit.getMin(
+				(Integer) freeSliceDepthStart.getValue(),
+				(Integer) freeSliceDepthEnd.getValue());
+		int ePos = DataAnalysisToolkit.getMax(
+				(Integer) freeSliceDepthStart.getValue(),
+				(Integer) freeSliceDepthEnd.getValue());
 
 		int avgNum = (Integer) freeSliceProjectNumber.getValue();
-		if (freeSliceFrame == null)
-		{
+		if (freeSliceFrame == null) {
 			freeSliceFrame = new JFrame();
 			JPanel controls = new JPanel(new FlowLayout());
 			controls.add(freeSliceRealTimeUpdate);
 
 			freeSliceFrame.getContentPane().removeAll();
 			freeSliceFrame.getContentPane().setLayout(new BorderLayout());
-			freeSliceFrame.getContentPane()
-					.add(freeSlicePanel, BorderLayout.CENTER);
+			freeSliceFrame.getContentPane().add(freeSlicePanel,
+					BorderLayout.CENTER);
 
 			freeSliceFrame.getContentPane().add(controls, BorderLayout.NORTH);
 		}
@@ -1396,33 +1210,27 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		/*
 		 * Get the point data from the data
 		 */
-		if (this.previewAxes == NativeDataSet.X_SLICE)
-		{
+		if (this.previewAxes == NativeDataSet.X_SLICE) {
 			pA = xFreeSlice.points.get(0);
 			pB = xFreeSlice.points.get(1);
-		} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-		{
+		} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 			pA = yFreeSlice.points.get(0);
 			pB = yFreeSlice.points.get(1);
-		} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-		{
+		} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 			pA = zFreeSlice.points.get(0);
 			pB = zFreeSlice.points.get(1);
 		}
 
 		sizeX = (int) (pA.distance(pB));
 		sizeY = (ePos - sPos);
-		if (sizeY < 1)
-		{
+		if (sizeY < 1) {
 			sizeY = 1;
 		}
-		if (sizeX < 1)
-		{
+		if (sizeX < 1) {
 			sizeX = 1;
 		}
 		BufferedImage img = freeSliceData[0];
-		if (img == null || img.getWidth() != sizeX || img.getHeight() != sizeY)
-		{
+		if (img == null || img.getWidth() != sizeX || img.getHeight() != sizeY) {
 			freeSliceData[0] = new BufferedImage(sizeX, sizeY,
 					BufferedImage.TYPE_4BYTE_ABGR);
 			freeSliceData[1] = new BufferedImage(sizeX, sizeY,
@@ -1450,15 +1258,13 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 
 		int datHold[] = new int[2 * avgNum + 1];
 		int[] stats = new int[3];
-		for (int x = 0; x < sizeX; x++)
-		{
+		for (int x = 0; x < sizeX; x++) {
 			pos = (x / (float) (sizeX - 1));
 
 			p.x = (int) (pA.x + pos * (pB.x - pA.x));
 			p.y = (int) (pA.y + pos * (pB.y - pA.y));
 
-			for (int y = 0; y < (ePos - sPos); y++)
-			{
+			for (int y = 0; y < (ePos - sPos); y++) {
 				/**
 				 * This code should was removed when the data was to be loaded
 				 * into 4 different images for max, min, avg, none.
@@ -1504,22 +1310,18 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				{
 					int trueVal = 0;
 					int count = 0;
-					for (int avg = -avgNum; avg <= avgNum; avg++)
-					{
+					for (int avg = -avgNum; avg <= avgNum; avg++) {
 
 						MathsToolkit.setLength(avgDir, avg, avgPos);
-						if (this.previewAxes == NativeDataSet.X_SLICE)
-						{
+						if (this.previewAxes == NativeDataSet.X_SLICE) {
 							vx = y + sPos;
 							vy = (int) (p.y + avgPos.y);
 							vz = (int) (p.x + avgPos.x);
-						} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-						{
+						} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 							vy = y + sPos;
 							vx = (int) (p.x + avgPos.x);
 							vz = (int) (p.y + avgPos.y);
-						} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-						{
+						} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 							vz = y + sPos;
 							vx = (int) (p.x + avgPos.x);
 							vy = (int) (p.y + avgPos.y);
@@ -1532,18 +1334,13 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 								&& (vy < data.getPreviewSizeY())
 								&& (vz < data.getPreviewSizeZ());
 
-						if (valid)
-						{
+						if (valid) {
 
-							datHold[count++] = NativeDataSet.getByteToInt(data
-									.getPreviewData()[vx][vy][vz]);
-							if (avg == 0)
-							{
-								trueVal = NativeDataSet.getByteToInt(data
-										.getPreviewData()[vx][vy][vz]);
+							datHold[count++] = NativeDataSet.getByteToInt(data.getPreviewData()[vx][vy][vz]);
+							if (avg == 0) {
+								trueVal = NativeDataSet.getByteToInt(data.getPreviewData()[vx][vy][vz]);
 							}
-						} else
-						{
+						} else {
 							datHold[count++] = 0;
 						}
 					}
@@ -1553,18 +1350,13 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 					 * this was added to calculate all measurments at the same
 					 * time.
 					 */
-					if (true)
-					{
+					if (true) {
 						DataAnalysisToolkit.getFullStatsInt(datHold, stats);
 						// Remove Posavg too;
-						freeSliceData[0].setRGB(x, y, NativeDataSet
-								.getByteToRGB((byte) trueVal));
-						freeSliceData[1].setRGB(x, y, NativeDataSet
-								.getByteToRGB((byte) stats[0]));
-						freeSliceData[2].setRGB(x, y, NativeDataSet
-								.getByteToRGB((byte) stats[1]));
-						freeSliceData[3].setRGB(x, y, NativeDataSet
-								.getByteToRGB((byte) stats[2]));
+						freeSliceData[0].setRGB(x, y,NativeDataSet.getByteToRGB((byte) trueVal));
+						freeSliceData[1].setRGB(x, y,NativeDataSet.getByteToRGB((byte) stats[0]));
+						freeSliceData[2].setRGB(x, y,NativeDataSet.getByteToRGB((byte) stats[1]));
+						freeSliceData[3].setRGB(x, y,NativeDataSet.getByteToRGB((byte) stats[2]));
 					}
 					/**
 					 * Removed when array of images added to allow all to be
@@ -1602,16 +1394,14 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 			}
 		}
 
-		freeSlicePanel.setImage(freeSliceData[freeSliceProjectType
-				.getSelectedIndex()]);
+		freeSlicePanel.setImage(freeSliceData[freeSliceProjectType.getSelectedIndex()]);
 		freeSliceFrame.setVisible(true);
 	}
 
 	/**
 	 * This will update the current too Overlay and block all updates
 	 */
-	public void updateToolOverlay()
-	{
+	public void updateToolOverlay() {
 		blockUpdate = true;
 
 		allowProjection = false;
@@ -1640,103 +1430,76 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		// Update Preview Panel overlay
 		profileControlHolder.removeAll();
 		profileControlHolder.setLayout(new BorderLayout());
-		if (this.previewAxes == NativeDataSet.X_SLICE)
-		{
+		if (this.previewAxes == NativeDataSet.X_SLICE) {
 			profileControlHolder.add(xProfileTool.getControls());
-		} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-		{
+		} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 			profileControlHolder.add(yProfileTool.getControls());
-		} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-		{
+		} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 			profileControlHolder.add(zProfileTool.getControls());
 		}
 
-		if (controlTabPanel.getSelectedIndex() == 0)
-		{// No Overlay
+		if (controlTabPanel.getSelectedIndex() == 0) {// No Overlay
 
-		} else if (controlTabPanel.getSelectedIndex() == 1)
-		{
-			if (measureTab.getSelectedIndex() == 0)
-			{// Line Measure
-				if (this.previewAxes == NativeDataSet.X_SLICE)
-				{
+		} else if (controlTabPanel.getSelectedIndex() == 1) {
+			if (measureTab.getSelectedIndex() == 0) {// Line Measure
+				if (this.previewAxes == NativeDataSet.X_SLICE) {
 					xLineMeasure.setListening(true);
 					xLineMeasure.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 					yLineMeasure.setListening(true);
 					yLineMeasure.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 					zLineMeasure.setListening(true);
 					zLineMeasure.setPanel(previewPanel);
 				}
-			} else if (measureTab.getSelectedIndex() == 1)
-			{// Path Measure
-				if (this.previewAxes == NativeDataSet.X_SLICE)
-				{
+			} else if (measureTab.getSelectedIndex() == 1) {// Path Measure
+				if (this.previewAxes == NativeDataSet.X_SLICE) {
 					xPathMeasure.setListening(true);
 					xPathMeasure.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 					yPathMeasure.setListening(true);
 					yPathMeasure.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 					zPathMeasure.setListening(true);
 					zPathMeasure.setPanel(previewPanel);
 				}
-			} else if (measureTab.getSelectedIndex() == 2)
-			{// Area Measure
-				if (this.previewAxes == NativeDataSet.X_SLICE)
-				{
+			} else if (measureTab.getSelectedIndex() == 2) {// Area Measure
+				if (this.previewAxes == NativeDataSet.X_SLICE) {
 					xAreaMeasure.setListening(true);
 					xAreaMeasure.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 					yAreaMeasure.setListening(true);
 					yAreaMeasure.setPanel(previewPanel);
 
-				} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 					zAreaMeasure.setListening(true);
 					zAreaMeasure.setPanel(previewPanel);
 				}
 			}
-		} else if (controlTabPanel.getSelectedIndex() == 2)
-		{
-			if (toolTab.getSelectedIndex() == 0)
-			{// Profile Tool
-				if (this.previewAxes == NativeDataSet.X_SLICE)
-				{
+		} else if (controlTabPanel.getSelectedIndex() == 2) {
+			if (toolTab.getSelectedIndex() == 0) {// Profile Tool
+				if (this.previewAxes == NativeDataSet.X_SLICE) {
 					xProfileTool.setListening(true);
 					xProfileTool.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 					yProfileTool.setListening(true);
 					yProfileTool.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 					zProfileTool.setListening(true);
 					zProfileTool.setPanel(previewPanel);
 				}
-			} else if (toolTab.getSelectedIndex() == 1)
-			{
+			} else if (toolTab.getSelectedIndex() == 1) {
 				// Prevent Continous Update
 				continousSliderUpdate.setSelected(false);
 				allowProjection = true;
-			} else if (toolTab.getSelectedIndex() == 2)
-			{
-				if (this.previewAxes == NativeDataSet.X_SLICE)
-				{
+			} else if (toolTab.getSelectedIndex() == 2) {
+				if (this.previewAxes == NativeDataSet.X_SLICE) {
 					xFreeSlice.setListening(true);
 					xFreeSlice.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Y_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Y_SLICE) {
 					yFreeSlice.setListening(true);
 					yFreeSlice.setPanel(previewPanel);
-				} else if (this.previewAxes == NativeDataSet.Z_SLICE)
-				{
+				} else if (this.previewAxes == NativeDataSet.Z_SLICE) {
 					zFreeSlice.setListening(true);
 					zFreeSlice.setPanel(previewPanel);
 				}
@@ -1746,10 +1509,8 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		blockUpdate = false;
 	}
 
-	public void updatePreviewPanel(final boolean highRes)
-	{
-		if (blockUpdate)
-		{
+	public void updatePreviewPanel(final boolean highRes) {
+		if (blockUpdate) {
 			return;
 		}
 		updateToolOverlay();
@@ -1757,137 +1518,110 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		BufferedImage img = previewPanel.getImage();
 		Dimension d;
 
-		if (renderHighRes.isSelected())
-		{
+		if (renderHighRes.isSelected()) {
 			d = data.getRenderSliceSize(getPreviewAxes());
-		} else
-		{
+		} else {
 			d = data.getPreviewSliceSize(getPreviewAxes());
 		}
-		if (img.getWidth() != d.width || img.getHeight() != d.height)
-		{
+		if (img.getWidth() != d.width || img.getHeight() != d.height) {
 			img = ImageOperations.getBi(d.width, d.height);
 			avgData = null;
 			previewPanel.setImage(img);
 		}
 
-		try
-		{
+		try {
 			/**
 			 * Check if data is to be average and if averaging is allowed
 			 */
 
+			// Project the data
+			int projectTypeToUse = 0;
+			if (projectType.getSelectedIndex() == 1) {
+				projectTypeToUse = ImageOperations.PROJECT_TYPE_AVERAGE;
+			} else if (projectType.getSelectedIndex() == 2) {
+				projectTypeToUse = ImageOperations.PROJECT_TYPE_MAX;
+			} else if (projectType.getSelectedIndex() == 3) {
+				projectTypeToUse = ImageOperations.PROJECT_TYPE_MIN;
+			}
 			int avgNum = (Integer) projectNumber.getValue();
 
-			if (!allowProjection)
-			{
+			if (!allowProjection) {
 				avgNum = 0;
 			}
 
-			if (avgNum == 0)
-			{// If not just get current image
-				if (highRes && renderHighRes.isSelected())
-				{
-					data
-							.getRenderSlice(getPreviewAxes(), previewPos, img, status);
-				} else
-				{
-					data
-							.getPreviewScaledSlice(getPreviewAxes(), previewPos, img);
+			if (avgNum == 0 || projectTypeToUse==0) {// If not just get current image
+				if (highRes && renderHighRes.isSelected()) {
+					data.getRenderSlice(getPreviewAxes(), previewPos, img,
+							status);
+				} else {
+					data.getPreviewScaledSlice(getPreviewAxes(), previewPos,
+							img);
 				}
-			} else
-			{// If yes load all data
+			} else {// If yes load all data
 				int pos = previewPos;
-				if (avgNum < 0)
-				{
+				if (avgNum < 0) {
 					avgNum *= -1;
 					pos -= avgNum;
 				}
 
-				if (pos < 0)
-				{
+				if (pos < 0) {
 					avgNum += pos;
 					pos = 0;
 
 				}
 
-				if (pos > data.getSizeData(getPreviewAxes()))
-				{
+				if (pos > data.getSizeData(getPreviewAxes())) {
 					avgNum += (data.getSizeData(getPreviewAxes()) - pos);
 					pos = data.getSizeData(getPreviewAxes());
 				}
 
-				if (avgNum < 1)
-				{
+				if (avgNum < 1) {
 					avgNum = 1;
 				}
 				// Load the images
-				if (avgData == null || avgData.length != avgNum)
-				{
+				if (avgData == null || avgData.length != avgNum) {
 					avgData = new BufferedImage[avgNum];
-					for (int i = 0; i < avgNum; i++)
-					{
+					for (int i = 0; i < avgNum; i++) {
 						avgData[i] = ImageOperations.getSameSizeImage(img);
 					}
 				}
-				for (int i = 0; i < avgNum; i++)
-				{
-					if (status != null)
-					{
+				for (int i = 0; i < avgNum; i++) {
+					if (status != null) {
 						status.setStatusMessage("Loading Image [" + i + " of "
 								+ (avgNum - 1) + "]");
 					}
-					if (highRes && renderHighRes.isSelected())
-					{
-						data
-								.getRenderSlice(getPreviewAxes(), pos + i, avgData[i], null);
-					} else
-					{
-						data
-								.getPreviewScaledSlice(getPreviewAxes(), pos
-										+ i, avgData[i]);
+					if (highRes && renderHighRes.isSelected()) {
+						data.getRenderSlice(getPreviewAxes(), pos + i,
+								avgData[i], null);
+					} else {
+						data.getPreviewScaledSlice(getPreviewAxes(), pos + i,
+								avgData[i]);
 					}
 				}
-				// Project the data
-				int project = 0;
-				if (projectType.getSelectedIndex() == 0)
-				{
-					project = ImageOperations.PROJECT_TYPE_AVERAGE;
-				} else if (projectType.getSelectedIndex() == 1)
-				{
-					project = ImageOperations.PROJECT_TYPE_MAX;
-				} else if (projectType.getSelectedIndex() == 2)
-				{
-					project = ImageOperations.PROJECT_TYPE_MIN;
-				}
-				if (status != null)
-				{
+				
+				if (status != null) {
 					status.setStatusMessage("Starting Projection");
 				}
-				ImageOperations
-						.getImageProjection(project, ImageOperations.PLANE_GRAY, null, img, avgData);
+				ImageOperations.getImageProjection(projectTypeToUse,
+						ImageOperations.PLANE_GRAY, null, img, avgData);
 
 			}
-			if (status != null)
-			{
+			if (status != null) {
 				status.setStatusMessage("Doing Image Processing ");
 			}
 			imageProcesser.processImage(previewPanel.getImage());
 			// previewPanel.setScale(getViewScale(), getViewScale());
 
 			// Draw Lines if needed
-			if (showPositionLines.isSelected())
-			{
+			if (showPositionLines.isSelected()) {
 				drawPlaneLines(img, (float) lineTransparency.getValue()
 						/ (float) lineTransparency.getMaximum());
 			}
-			if (status != null)
-			{
+			if (status != null) {
 				status.reset();
 			}
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "There was and error :\n" + e);
 			e.printStackTrace();
 		}
@@ -1897,16 +1631,14 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		repaint();
 	}
 
-	public void drawPlaneLines(BufferedImage img, float alpha)
-	{
+	public void drawPlaneLines(BufferedImage img, float alpha) {
 		double x = 1;
 		double y = 1;
 
 		Color xCol = Color.RED;
 		Color yCol = Color.red;
 
-		if (getPreviewAxes() == xSlicePanel.sliceAxes)
-		{
+		if (getPreviewAxes() == xSlicePanel.sliceAxes) {
 
 			y = (double) ySlicePanel.pos.getValue()
 					/ ySlicePanel.pos.getMaximum();
@@ -1915,16 +1647,14 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 			xCol = SlicePanel.Z_AXIS_COLOR;
 			yCol = SlicePanel.Y_AXIS_COLOR;
 
-		} else if (getPreviewAxes() == ySlicePanel.sliceAxes)
-		{
+		} else if (getPreviewAxes() == ySlicePanel.sliceAxes) {
 			x = (double) xSlicePanel.pos.getValue()
 					/ xSlicePanel.pos.getMaximum();
 			y = (double) zSlicePanel.pos.getValue()
 					/ zSlicePanel.pos.getMaximum();
 			xCol = SlicePanel.X_AXIS_COLOR;
 			yCol = SlicePanel.Z_AXIS_COLOR;
-		} else if (getPreviewAxes() == zSlicePanel.sliceAxes)
-		{
+		} else if (getPreviewAxes() == zSlicePanel.sliceAxes) {
 			x = (double) xSlicePanel.pos.getValue()
 					/ xSlicePanel.pos.getMaximum();
 			y = (double) ySlicePanel.pos.getValue()
@@ -1946,8 +1676,8 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		y *= img.getHeight();
 
 		Graphics2D g = img.createGraphics();
-		g.setComposite(AlphaComposite
-				.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				alpha));
 		GraphicsToolkit.setRenderingQuality(g, GraphicsToolkit.HIGH_QUALITY);
 		g.setColor(xCol);
 		g.drawLine((int) x, 0, (int) x, img.getHeight());
@@ -1958,17 +1688,14 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e)
-	{
+	public void mouseDragged(MouseEvent e) {
 
-		if (e.getModifiersEx() == InputEvent.BUTTON1_DOWN_MASK)
-		{
+		if (e.getModifiersEx() == InputEvent.BUTTON1_DOWN_MASK) {
 			mouseDragging = true;
 			double x = 1;
 			double y = 1;
 			double z = 1;
-			if (e.getSource() == xSlicePanel.imgPanel)
-			{
+			if (e.getSource() == xSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				xSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -1978,8 +1705,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				y = (double) img.y / data.getPreviewSizeY();
 				z = (double) img.x / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == ySlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == ySlicePanel.imgPanel) {
 
 				Point img = new Point();
 				ySlicePanel.getPaneltoData(e.getPoint(), img);
@@ -1989,8 +1715,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 						/ ySlicePanel.pos.getMaximum();
 				z = (double) img.y / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == zSlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == zSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				zSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2030,62 +1755,51 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent e)
-	{
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e)
-	{
+	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e)
-	{
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e)
-	{
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e)
-	{
-		if (e.getButton() == MouseEvent.BUTTON3)
-		{
-			if (e.getSource() == xSlicePanel.imgPanel)
-			{
+	public void mousePressed(MouseEvent e) {
+		if (e.getButton() == MouseEvent.BUTTON3) {
+			if (e.getSource() == xSlicePanel.imgPanel) {
 				setPreviewAxes(NativeDataSet.X_SLICE);
 				previewPos = xSlicePanel.getPosition();
-			} else if (e.getSource() == ySlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == ySlicePanel.imgPanel) {
 				setPreviewAxes(NativeDataSet.Y_SLICE);
 				previewPos = ySlicePanel.getPosition();
-			} else if (e.getSource() == zSlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == zSlicePanel.imgPanel) {
 				setPreviewAxes(NativeDataSet.Z_SLICE);
 				previewPos = zSlicePanel.getPosition();
 			}
 
 			updatePreviewPanel(true);
 		}
-		if (e.getButton() == MouseEvent.BUTTON1)
-		{
+		if (e.getButton() == MouseEvent.BUTTON1) {
 			mouseDragging = true;
 			double x = 1;
 			double y = 1;
 			double z = 1;
-			if (e.getSource() == xSlicePanel.imgPanel)
-			{
+			if (e.getSource() == xSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				xSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2095,8 +1809,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				y = (double) img.y / data.getPreviewSizeY();
 				z = (double) img.x / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == ySlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == ySlicePanel.imgPanel) {
 
 				Point img = new Point();
 				ySlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2106,8 +1819,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 						/ ySlicePanel.pos.getMaximum();
 				z = (double) img.y / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == zSlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == zSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				zSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2147,21 +1859,17 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e)
-	{
-		if (mouseDragging)
-		{
+	public void mouseReleased(MouseEvent e) {
+		if (mouseDragging) {
 			mouseDragging = false;
 			updatePreviewPanel(true);
 		}
 
-		if (e.getButton() == MouseEvent.BUTTON1)
-		{
+		if (e.getButton() == MouseEvent.BUTTON1) {
 			double x = 1;
 			double y = 1;
 			double z = 1;
-			if (e.getSource() == xSlicePanel.imgPanel)
-			{
+			if (e.getSource() == xSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				xSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2171,8 +1879,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				y = (double) img.y / data.getPreviewSizeY();
 				z = (double) img.x / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == ySlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == ySlicePanel.imgPanel) {
 
 				Point img = new Point();
 				ySlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2182,8 +1889,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 						/ ySlicePanel.pos.getMaximum();
 				z = (double) img.y / data.getPreviewSizeZ();
 
-			} else if (e.getSource() == zSlicePanel.imgPanel)
-			{
+			} else if (e.getSource() == zSlicePanel.imgPanel) {
 
 				Point img = new Point();
 				zSlicePanel.getPaneltoData(e.getPoint(), img);
@@ -2222,14 +1928,11 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void stateChanged(ChangeEvent e)
-	{
-		if (!isUpdateAllowed())
-		{
+	public void stateChanged(ChangeEvent e) {
+		if (!isUpdateAllowed()) {
 			return;
 		}
-		if (e.getSource() instanceof JSlider)
-		{
+		if (e.getSource() instanceof JSlider) {
 			JSlider slide = (JSlider) e.getSource();
 
 			{
@@ -2265,28 +1968,23 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 				zSlicePanel.crossY = y;
 
 				if (slide == xSlicePanel.pos
-						&& xSlicePanel.sliceAxes == getPreviewAxes())
-				{
+						&& xSlicePanel.sliceAxes == getPreviewAxes()) {
 					// setPreviewAxes(OCTDataSet.X_SLICE);
 					previewPos = slide.getValue();
 				} else if (slide == ySlicePanel.pos
-						&& ySlicePanel.sliceAxes == getPreviewAxes())
-				{
+						&& ySlicePanel.sliceAxes == getPreviewAxes()) {
 					// setPreviewAxes(OCTDataSet.Y_SLICE);
 					previewPos = slide.getValue();
 				} else if (slide == zSlicePanel.pos
-						&& zSlicePanel.sliceAxes == getPreviewAxes())
-				{
+						&& zSlicePanel.sliceAxes == getPreviewAxes()) {
 					// setPreviewAxes(OCTDataSet.Z_SLICE);
 					previewPos = slide.getValue();
 				}
 				repaint();
 
 				if (!slide.getValueIsAdjusting()
-						|| continousSliderUpdate.isSelected())
-				{
-					if (!mouseDragging)
-					{
+						|| continousSliderUpdate.isSelected()) {
+					if (!mouseDragging) {
 						updatePreviewPanel(true);
 					}
 
@@ -2299,30 +1997,25 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		if (e.getSource() == colorMapButton)
-		{
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == colorMapButton) {
 			imageProcesser.setColorMap(ColorMapTools.showUserChoicePanel());
 			updatePreviewPanel(true);
 		}
 
 	}
 
-	public StatusBarPanel getStatus()
-	{
+	public StatusBarPanel getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusBarPanel status)
-	{
+	public void setStatus(StatusBarPanel status) {
 		this.status = status;
 	}
 
 	@Override
 	public void readExternal(ObjectInput in) throws IOException,
-			ClassNotFoundException
-	{
+			ClassNotFoundException {
 		// Remove OLD Listners
 		xSlicePanel.imgPanel.removeMouseListener(this);
 		xSlicePanel.imgPanel.removeMouseMotionListener(this);
@@ -2380,8 +2073,7 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	}
 
 	@Override
-	public void writeExternal(ObjectOutput out) throws IOException
-	{
+	public void writeExternal(ObjectOutput out) throws IOException {
 		out.writeObject(data);
 
 		out.writeObject(xSlicePanel);
@@ -2401,13 +2093,11 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		out.writeBoolean(continousSliderUpdate.isSelected());
 	}
 
-	public int getPreviewAxes()
-	{
+	public int getPreviewAxes() {
 		return previewAxes;
 	}
 
-	public void setPreviewAxes(int previewAxes)
-	{
+	public void setPreviewAxes(int previewAxes) {
 		this.previewAxes = previewAxes;
 
 		blockUpdate = true;
@@ -2415,109 +2105,89 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 		blockUpdate = false;
 	}
 
-	public int getPreviewPos()
-	{
+	public int getPreviewPos() {
 		return previewPos;
 	}
 
-	public void setPreviewPos(int previewPos)
-	{
+	public void setPreviewPos(int previewPos) {
 		this.previewPos = previewPos;
 	}
 
-	public SlicePanel getXSlicePanel()
-	{
+	public SlicePanel getXSlicePanel() {
 		return xSlicePanel;
 	}
 
-	public SlicePanel getYSlicePanel()
-	{
+	public SlicePanel getYSlicePanel() {
 		return ySlicePanel;
 	}
 
-	public SlicePanel getZSlicePanel()
-	{
+	public SlicePanel getZSlicePanel() {
 		return zSlicePanel;
 	}
 
-	public JButton getColorMapButton()
-	{
+	public JButton getColorMapButton() {
 		return colorMapButton;
 	}
 
-	public ImagePanel getPreviewPanel()
-	{
+	public ImagePanel getPreviewPanel() {
 		return previewPanel;
 	}
 
-	public JCheckBox getContinousSliderUpdate()
-	{
+	public JCheckBox getContinousSliderUpdate() {
 		return continousSliderUpdate;
 	}
 
-	public JCheckBox getRenderHighRes()
-	{
+	public JCheckBox getRenderHighRes() {
 		return renderHighRes;
 	}
 
-	public OCTImageProcessingTool getImageProcesser()
-	{
+	public OCTImageProcessingTool getImageProcesser() {
 		return imageProcesser;
 	}
 
-	public NativeDataSet getOCTData()
-	{
+	public NativeDataSet getOCTData() {
 		// TODO Auto-generated method stub
 		return data;
 	}
 
 	@Override
-	public void regionAdded(Shape region)
-	{
+	public void regionAdded(Shape region) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void regionChanged()
-	{
+	public void regionChanged() {
 		updateMeasurement();
 	}
 
 	@Override
-	public void regionRemoved(Shape region)
-	{
+	public void regionRemoved(Shape region) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public JTextField getXDxField()
-	{
+	public JTextField getXDxField() {
 		return xDxField;
 	}
 
-	public JTextField getXDyField()
-	{
+	public JTextField getXDyField() {
 		return xDyField;
 	}
 
-	public JTextField getYDxField()
-	{
+	public JTextField getYDxField() {
 		return yDxField;
 	}
 
-	public JTextField getYDyField()
-	{
+	public JTextField getYDyField() {
 		return yDyField;
 	}
 
-	public JTextField getZDxField()
-	{
+	public JTextField getZDxField() {
 		return zDxField;
 	}
 
-	public JTextField getZDyField()
-	{
+	public JTextField getZDyField() {
 		return zDyField;
 	}
 
@@ -2533,8 +2203,9 @@ public class OCTSliceViewer extends JPanel implements MouseMotionListener,
 	 * @param angle
 	 * @return
 	 */
-	public static BufferedImage[] getImageData(OCTSliceViewer viewer, OCTViewDataHolder view, NativeDataSet data, int projectNum, int scanLength, int angle)
-	{
+	public static BufferedImage[] getImageData(OCTSliceViewer viewer,
+			OCTViewDataHolder view, NativeDataSet data, int projectNum,
+			int scanLength, int angle) {
 		viewer.blockFreeSliceUpdate = true;
 		BufferedImage[] result = new BufferedImage[4];
 

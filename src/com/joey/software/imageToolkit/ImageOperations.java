@@ -10,7 +10,6 @@
  ******************************************************************************/
 package com.joey.software.imageToolkit;
 
-
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -68,9 +67,7 @@ import com.joey.software.framesToolkit.StatusBarPanel;
 import com.joey.software.imageToolkit.colorMapping.ColorMap;
 import com.joey.software.mathsToolkit.DataAnalysisToolkit;
 
-
-public class ImageOperations
-{
+public class ImageOperations {
 
 	public static final int X_AXIS = 0;
 
@@ -94,15 +91,13 @@ public class ImageOperations
 
 	public static final int PLANE_GRAY = 4;
 
-	public static byte[] image_byte_data(BufferedImage image)
-	{
+	public static byte[] image_byte_data(BufferedImage image) {
 		WritableRaster raster = image.getRaster();
 		DataBufferByte buffer = (DataBufferByte) raster.getDataBuffer();
 		return buffer.getData();
 	}
 
-	public static int[] imageToPixelsInts(BufferedImage image)
-	{
+	public static int[] imageToPixelsInts(BufferedImage image) {
 		WritableRaster raster = image.getRaster();
 		DataBufferInt buffer = (DataBufferInt) raster.getDataBuffer();
 		return buffer.getData();
@@ -118,27 +113,25 @@ public class ImageOperations
 	 * @param height
 	 * @return
 	 */
-	public static BufferedImage pixelsToImage(int[] pixels, int width, int height)
-	{
+	public static BufferedImage pixelsToImage(int[] pixels, int width,
+			int height) {
 		DirectColorModel directColorModel = new DirectColorModel(32, 0xff0000,
 				0xff00, 0xff, 0xff000000);
 		MemoryImageSource memoryImageSource = new MemoryImageSource(width,
 				height, directColorModel, pixels, 0, width);
-		SampleModel sampleModel = directColorModel
-				.createCompatibleSampleModel(width, height);
+		SampleModel sampleModel = directColorModel.createCompatibleSampleModel(
+				width, height);
 		DataBufferInt dataBufferInt = new DataBufferInt(pixels, width * height);
 
-		WritableRaster writableRaster = Raster
-				.createWritableRaster(sampleModel, dataBufferInt, new Point(0,
-						0));
+		WritableRaster writableRaster = Raster.createWritableRaster(
+				sampleModel, dataBufferInt, new Point(0, 0));
 		BufferedImage bufferedImage = new BufferedImage(directColorModel,
 				writableRaster, false, null);
 
 		return bufferedImage;
 	}
 
-	public static BufferedImage pixelsToImage(byte[] data, int w, int h)
-	{
+	public static BufferedImage pixelsToImage(byte[] data, int w, int h) {
 		DataBuffer buffer = new DataBufferByte(data, w * h);
 
 		int pixelStride = 1; // assuming r, g, b,
@@ -147,8 +140,8 @@ public class ImageOperations
 		int scanlineStride = w; // no extra
 								// padding
 		int[] bandOffsets = { 0 }; // r, g, b
-		WritableRaster raster = Raster
-				.createInterleavedRaster(buffer, w, h, scanlineStride, pixelStride, bandOffsets, null);
+		WritableRaster raster = Raster.createInterleavedRaster(buffer, w, h,
+				scanlineStride, pixelStride, bandOffsets, null);
 
 		ColorSpace colorSpace = ColorSpace.getInstance(ColorSpace.CS_GRAY);
 		boolean hasAlpha = false;
@@ -161,12 +154,10 @@ public class ImageOperations
 		return new BufferedImage(colorModel, raster, isAlphaPremultiplied, null);
 	}
 
-	public static void splitColor(BufferedImage src, BufferedImage red, BufferedImage green, BufferedImage blue)
-	{
-		for (int x = 0; x < src.getWidth(); x++)
-		{
-			for (int y = 0; y < src.getHeight(); y++)
-			{
+	public static void splitColor(BufferedImage src, BufferedImage red,
+			BufferedImage green, BufferedImage blue) {
+		for (int x = 0; x < src.getWidth(); x++) {
+			for (int y = 0; y < src.getHeight(); y++) {
 				Color c = new Color(src.getRGB(x, y));
 
 				Color r = new Color(c.getRed(), c.getRed(), c.getRed());
@@ -180,73 +171,57 @@ public class ImageOperations
 		}
 	}
 
-	public static void grabPxlData(BufferedImage img, float[][] data, int plane)
-	{
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
+	public static void grabPxlData(BufferedImage img, float[][] data, int plane) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
 				data[x][y] = getPlaneFromRGBA(img.getRGB(x, y), plane);
 			}
 		}
 	}
-	
-	public static byte[][] grabPxlData(BufferedImage img, int plane)
-	{
+
+	public static byte[][] grabPxlData(BufferedImage img, int plane) {
 		byte[][] rst = new byte[img.getWidth()][img.getHeight()];
 		grabPxlData(img, rst, plane);
 		return rst;
 	}
-	public static void grabPxlData(BufferedImage img, byte[][] data, int plane)
-	{
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
-				data[x][y] = (byte)getPlaneFromRGBA(img.getRGB(x, y), plane);
+
+	public static void grabPxlData(BufferedImage img, byte[][] data, int plane) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
+				data[x][y] = (byte) getPlaneFromRGBA(img.getRGB(x, y), plane);
 			}
 		}
 	}
 
-	public static void grabPxlData(BufferedImage img, int[][] data, int plane)
-	{
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
+	public static void grabPxlData(BufferedImage img, int[][] data, int plane) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
 				data[x][y] = getPlaneFromRGBA(img.getRGB(x, y), plane);
 			}
 		}
 	}
 
-	public static void grabPxlData(BufferedImage img, double[][] data, int plane)
-	{
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
+	public static void grabPxlData(BufferedImage img, double[][] data, int plane) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
 				data[x][y] = getPlaneFromRGBA(img.getRGB(x, y), plane);
 			}
 		}
 	}
 
 	/**
-	 * This will grab the pixel data from a given
-	 * buffered image. This will grab the pixel
-	 * data between p1 and p2 and store it into
-	 * red, green, blue; if no data is wanted in
-	 * red/green/blue just pass null.
+	 * This will grab the pixel data from a given buffered image. This will grab
+	 * the pixel data between p1 and p2 and store it into red, green, blue; if
+	 * no data is wanted in red/green/blue just pass null.
 	 * 
-	 * If the size of red/green/blue is 1/0 it
-	 * will return the value of the pixel between
-	 * p1, p2
+	 * If the size of red/green/blue is 1/0 it will return the value of the
+	 * pixel between p1, p2
 	 * 
 	 * @param img
 	 * @param p1
 	 *            - First point to get pixels on.
 	 * @param p2
-	 *            - Second point on line to get
-	 *            pixels from
+	 *            - Second point on line to get pixels from
 	 * @param red
 	 *            - Store red pixel values
 	 * @param green
@@ -254,11 +229,10 @@ public class ImageOperations
 	 * @param blue
 	 *            - store blue pixel values
 	 * @param size
-	 *            - The number of points to get
-	 *            between p1 and p2
+	 *            - The number of points to get between p1 and p2
 	 */
-	public static void getPixelData(BufferedImage img, Point p1, Point p2, int[] red, int[] green, int[] blue, int[] gray, int size)
-	{
+	public static void getPixelData(BufferedImage img, Point p1, Point p2,
+			int[] red, int[] green, int[] blue, int[] gray, int size) {
 		double step = 1.0 / (size - 1);
 		double pos = 0;
 		int count = 0;
@@ -267,8 +241,7 @@ public class ImageOperations
 
 		// In the case of a single size array
 		// return the mid point value
-		if (size == 1)
-		{
+		if (size == 1) {
 			x = (int) Math.round((p1.x + p2.x) / 2.0);
 			y = (int) Math.round((p1.y + p2.y) / 2.0);
 
@@ -277,20 +250,16 @@ public class ImageOperations
 			// System.out.printf("[%3d , %3d ] -> [ %d , %d , %d ]\n",x,y,
 			// c.getRed(), c.getGreen(),
 			// c.getBlue());
-			if (red != null)
-			{
+			if (red != null) {
 				red[count] = c.getRed();
 			}
-			if (green != null)
-			{
+			if (green != null) {
 				green[count] = c.getGreen();
 			}
-			if (blue != null)
-			{
+			if (blue != null) {
 				blue[count] = c.getBlue();
 			}
-			if (gray != null)
-			{
+			if (gray != null) {
 				gray[count] = (c.getRed() + c.getBlue() + c.getGreen()) / 3;
 			}
 			return;
@@ -300,34 +269,27 @@ public class ImageOperations
 		// get pixel values
 		// using the equation Pnew = P1+(P2-P1)*r
 		// where r = 0 - 1
-		while (pos <= 1)
-		{
+		while (pos <= 1) {
 			x = (int) Math.round(p1.x + (p2.x - p1.x) * pos);
 			y = (int) Math.round(p1.y + (p2.y - p1.y) * pos);
 
 			Color c;
-			try
-			{
+			try {
 				c = new Color(img.getRGB(x, y));
-			} catch (ArrayIndexOutOfBoundsException e)
-			{
+			} catch (ArrayIndexOutOfBoundsException e) {
 				c = new Color(0, 0, 0);
 			}
 
-			if (red != null)
-			{
+			if (red != null) {
 				red[count] = c.getRed();
 			}
-			if (green != null)
-			{
+			if (green != null) {
 				green[count] = c.getGreen();
 			}
-			if (blue != null)
-			{
+			if (blue != null) {
 				blue[count] = c.getBlue();
 			}
-			if (gray != null)
-			{
+			if (gray != null) {
 				gray[count] = (c.getRed() + c.getBlue() + c.getGreen()) / 3;
 			}
 
@@ -336,27 +298,21 @@ public class ImageOperations
 		}
 	}
 
-	public static BufferedImage getImage(byte[][] data)
-	{
+	public static BufferedImage getImage(byte[][] data) {
 		BufferedImage img = getBi(data.length, data[0].length);
 
 		getImage(data, img);
 		return img;
 	}
 
-	public static void getImage(byte[][] data, BufferedImage img)
-	{
+	public static void getImage(byte[][] data, BufferedImage img) {
 
-		for (int x = 0; x < data.length; x++)
-		{
-			for (int y = 0; y < data[x].length; y++)
-			{
+		for (int x = 0; x < data.length; x++) {
+			for (int y = 0; y < data[x].length; y++) {
 				byte dat = data[x][y];
-				if (dat < 0)
-				{
+				if (dat < 0) {
 					img.setRGB(x, y, getGrayRGB(dat + 256));
-				} else
-				{
+				} else {
 					img.setRGB(x, y, getGrayRGB(dat));
 				}
 			}
@@ -364,27 +320,23 @@ public class ImageOperations
 
 	}
 
-	public static BufferedImage getImage(float[][] data, float min, float max,ColorMap map)
-	{
+	public static BufferedImage getImage(float[][] data, float min, float max,
+			ColorMap map) {
 		BufferedImage img = getBi(data.length, data[0].length);
-		getImage(data, min, max, map ,img);
+		getImage(data, min, max, map, img);
 		return img;
 	}
 
-	public static void getImage(float[][] data, float min, float max, ColorMap map, BufferedImage img)
-	{
+	public static void getImage(float[][] data, float min, float max,
+			ColorMap map, BufferedImage img) {
 
-		for (int x = 0; x < data.length; x++)
-		{
-			for (int y = 0; y < data[x].length; y++)
-			{
+		for (int x = 0; x < data.length; x++) {
+			for (int y = 0; y < data[x].length; y++) {
 				float dat = (data[x][y] - min) / (max - min);
-				if (dat < 0)
-				{
+				if (dat < 0) {
 					dat = 0;
 				}
-				if (dat > 1)
-				{
+				if (dat > 1) {
 					dat = 1;
 				}
 				img.setRGB(x, y, map.getColor(dat).getRGB());
@@ -393,8 +345,8 @@ public class ImageOperations
 
 	}
 
-	public static BufferedImage getImageProjection(int projectType, int planeType, StatusBarPanel status, BufferedImage... img)
-	{
+	public static BufferedImage getImageProjection(int projectType,
+			int planeType, StatusBarPanel status, BufferedImage... img) {
 		int wide = img[0].getWidth();
 		int high = img[0].getHeight();
 		int num = img.length;
@@ -404,8 +356,8 @@ public class ImageOperations
 		return rst;
 	}
 
-	public static void getImageProjection(int projectType, int planeType, StatusBarPanel status, BufferedImage rst, BufferedImage... img)
-	{
+	public static void getImageProjection(int projectType, int planeType,
+			StatusBarPanel status, BufferedImage rst, BufferedImage... img) {
 
 		int wide = img[0].getWidth();
 		int high = img[0].getHeight();
@@ -414,32 +366,24 @@ public class ImageOperations
 		int[] vals = new int[num];
 		int result = 0;
 
-		if (status != null)
-		{
+		if (status != null) {
 			status.setMaximum(wide - 1);
 		}
-		for (int x = 0; x < wide; x++)
-		{
-			if (status != null)
-			{
+		for (int x = 0; x < wide; x++) {
+			if (status != null) {
 				status.setValue(x);
 			}
-			for (int y = 0; y < high; y++)
-			{
+			for (int y = 0; y < high; y++) {
 
-				for (int i = 0; i < num; i++)
-				{
+				for (int i = 0; i < num; i++) {
 					vals[i] = getPlaneFromRGBA(img[i].getRGB(x, y), planeType);
 				}
 
-				if (projectType == PROJECT_TYPE_AVERAGE)
-				{
+				if (projectType == PROJECT_TYPE_AVERAGE) {
 					result = DataAnalysisToolkit.getAverage(vals);
-				} else if (projectType == PROJECT_TYPE_MIN)
-				{
+				} else if (projectType == PROJECT_TYPE_MIN) {
 					result = DataAnalysisToolkit.getMin(vals);
-				} else if (projectType == PROJECT_TYPE_MAX)
-				{
+				} else if (projectType == PROJECT_TYPE_MAX) {
 					result = DataAnalysisToolkit.getMax(vals);
 				}
 
@@ -454,17 +398,14 @@ public class ImageOperations
 	 * @param val
 	 * @return
 	 */
-	public static int getGrayRGB(int val)
-	{
+	public static int getGrayRGB(int val) {
 		float pos = val / 256.0f;
 
-		if (pos < 0)
-		{
+		if (pos < 0) {
 			pos = 0;
 		}
 
-		if (pos > 1)
-		{
+		if (pos > 1) {
 			pos = 1;
 		}
 
@@ -472,57 +413,43 @@ public class ImageOperations
 		return c.getRGB();
 	}
 
-	public static int getPlaneFromRGBA(int rgb, int plane)
-	{
+	public static int getPlaneFromRGBA(int rgb, int plane) {
 		Color c = new Color(rgb);
-		if (plane == PLANE_RED)
-		{
+		if (plane == PLANE_RED) {
 			return c.getRed();
-		} else if (plane == PLANE_BLUE)
-		{
+		} else if (plane == PLANE_BLUE) {
 			return c.getBlue();
-		} else if (plane == PLANE_GREEN)
-		{
+		} else if (plane == PLANE_GREEN) {
 			return c.getGreen();
-		} else if (plane == PLANE_GRAY)
-		{
+		} else if (plane == PLANE_GRAY) {
 			return (c.getRed() + c.getBlue() + c.getGreen()) / 3;
-		} else if (plane == PLANE_ALPHA)
-		{
+		} else if (plane == PLANE_ALPHA) {
 			return c.getAlpha();
-		} else
-		{
+		} else {
 			return 0;
 		}
 	}
 
-	public static BufferedImage getAverageImage(File[] data) throws IOException
-	{
+	public static BufferedImage getAverageImage(File[] data) throws IOException {
 		float[][] dataHold = null;
 
-		for (int i = 0; i < data.length; i++)
-		{
+		for (int i = 0; i < data.length; i++) {
 			BufferedImage img = ImageIO.read(data[i]);
-			if (i == 0)
-			{
+			if (i == 0) {
 				dataHold = new float[img.getWidth()][img.getHeight()];
 			}
-			for (int x = 0; x < img.getWidth(); x++)
-			{
-				for (int y = 0; y < img.getHeight(); y++)
-				{
+			for (int x = 0; x < img.getWidth(); x++) {
+				for (int y = 0; y < img.getHeight(); y++) {
 					dataHold[x][y] += getGrayScale(img.getRGB(x, y))
 							/ data.length;
 				}
 			}
 		}
 
-		BufferedImage img = ImageOperations
-				.getBi(dataHold.length, dataHold[0].length);
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
+		BufferedImage img = ImageOperations.getBi(dataHold.length,
+				dataHold[0].length);
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
 				Color c = new Color((int) dataHold[x][y], (int) dataHold[x][y],
 						(int) dataHold[x][y]);
 				img.setRGB(x, y, c.getRGB());
@@ -532,32 +459,25 @@ public class ImageOperations
 		return img;
 	}
 
-	public static BufferedImage getAverageData(Vector<BufferedImage> data, int[][] val)
-	{
+	public static BufferedImage getAverageData(Vector<BufferedImage> data,
+			int[][] val) {
 
 		int wide = val.length;
 		int high = val[0].length;
 
-		for (int x = 0; x < wide; x++)
-		{
-			for (int y = 0; y < high; y++)
-			{
+		for (int x = 0; x < wide; x++) {
+			for (int y = 0; y < high; y++) {
 				val[x][y] = 0;
 			}
 		}
 
-		for (int i = 0; i < data.size(); i++)
-		{
-			for (int x = 0; x < wide; x++)
-			{
-				for (int y = 0; y < high; y++)
-				{
-					try
-					{
+		for (int i = 0; i < data.size(); i++) {
+			for (int x = 0; x < wide; x++) {
+				for (int y = 0; y < high; y++) {
+					try {
 						Color c = new Color(data.get(i).getRGB(x, y));
 						val[x][y] += (c.getRed() + c.getGreen() + c.getBlue()) / 3;
-					} catch (Exception e)
-					{
+					} catch (Exception e) {
 
 					}
 				}
@@ -566,25 +486,19 @@ public class ImageOperations
 
 		// set average // getmax and min
 		BufferedImage rst = ImageOperations.getBi(wide, high);
-		for (int x = 0; x < wide; x++)
-		{
-			for (int y = 0; y < high; y++)
-			{
-				try
-				{
+		for (int x = 0; x < wide; x++) {
+			for (int y = 0; y < high; y++) {
+				try {
 					val[x][y] /= data.size();
-					if (val[x][y] > 255)
-					{
+					if (val[x][y] > 255) {
 						val[x][y] = 255;
 					}
-					if (val[x][y] < 0)
-					{
+					if (val[x][y] < 0) {
 						val[x][y] = 0;
 					}
 					Color c = new Color(val[x][y], val[x][y], val[x][y]);
 					rst.setRGB(x, y, c.getRGB());
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 
 				}
 			}
@@ -594,8 +508,7 @@ public class ImageOperations
 		return rst;
 	}
 
-	public static BufferedImage getUserImage() throws IOException
-	{
+	public static BufferedImage getUserImage() throws IOException {
 		FileSelectionField imageFileSelector = new FileSelectionField();
 		JPanel holder = new JPanel(new BorderLayout());
 		imageFileSelector
@@ -604,20 +517,17 @@ public class ImageOperations
 		imageFileSelector.setFieldSize(400);
 		holder.add(imageFileSelector, BorderLayout.NORTH);
 
-		if (JOptionPane
-				.showConfirmDialog(null, holder, "Please Select New Image", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION)
-		{
+		if (JOptionPane.showConfirmDialog(null, holder,
+				"Please Select New Image", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION) {
 			return ImageIO.read(imageFileSelector.getFile());
 		}
 		return null;
 	}
 
-	public static void fillWithRandomColors(BufferedImage src)
-	{
-		for (int x = 0; x < src.getWidth(); x++)
-		{
-			for (int y = 0; y < src.getHeight(); y++)
-			{
+	public static void fillWithRandomColors(BufferedImage src) {
+		for (int x = 0; x < src.getWidth(); x++) {
+			for (int y = 0; y < src.getHeight(); y++) {
 
 				src.setRGB(x, y, getRandomColor().getRGB());
 
@@ -626,31 +536,26 @@ public class ImageOperations
 	}
 
 	/**
-	 * Split x-Axes - horizon splits split y-axes
-	 * - vertical splirs
+	 * Split x-Axes - horizon splits split y-axes - vertical splirs
 	 * 
 	 * @param src
 	 * @param count
 	 * @param axes
 	 * @return
 	 */
-	public static BufferedImage[] splitImage(BufferedImage src, int count, int axes)
-	{
+	public static BufferedImage[] splitImage(BufferedImage src, int count,
+			int axes) {
 		BufferedImage[] rst = new BufferedImage[count];
 
-		if (axes == X_AXIS)
-		{
+		if (axes == X_AXIS) {
 			int wide = src.getWidth();
 			int high = (int) Math.ceil(src.getHeight() / (double) count);
-			for (int i = 0; i < count; i++)
-			{
+			for (int i = 0; i < count; i++) {
 				rst[i] = ImageOperations.getBi(wide, high);
 			}
 
-			for (int x = 0; x < src.getWidth(); x++)
-			{
-				for (int y = 0; y < src.getHeight(); y++)
-				{
+			for (int x = 0; x < src.getWidth(); x++) {
+				for (int y = 0; y < src.getHeight(); y++) {
 					int index = y / high;
 					int pos = y % high;
 					rst[index].setRGB(x, pos, src.getRGB(x, y));
@@ -658,23 +563,20 @@ public class ImageOperations
 				}
 			}
 			return rst;
-		} else if (axes == Y_AXIS)
-		{
+		} else if (axes == Y_AXIS) {
 			int wide = (int) Math.ceil(src.getWidth() / (double) count);
 			int high = src.getHeight();
-			for (int i = 0; i < count; i++)
-			{
+			for (int i = 0; i < count; i++) {
 				rst[i] = ImageOperations.getBi(wide, high);
 			}
 
-			for (int x = 0; x < src.getWidth(); x++)
-			{
-				for (int y = 0; y < src.getHeight(); y++)
-				{
+			for (int x = 0; x < src.getWidth(); x++) {
+				for (int y = 0; y < src.getHeight(); y++) {
 					int index = x / wide;
 					int pos = x % wide;
 					System.out
-							.printf("Src [ %d , %d ] , Rst[%d] pos [ %d, %d] of [%d , %d] \n", x, y, index, pos, y, wide, high);
+							.printf("Src [ %d , %d ] , Rst[%d] pos [ %d, %d] of [%d , %d] \n",
+									x, y, index, pos, y, wide, high);
 					rst[index].setRGB(pos, y, src.getRGB(x, y));
 
 				}
@@ -691,16 +593,12 @@ public class ImageOperations
 	 * @param pxls
 	 * @param c
 	 */
-	public static void addColorBorder(BufferedImage img, int pxls, Color c)
-	{
-		for (int x = 0; x < img.getWidth(); x++)
-		{
-			for (int y = 0; y < img.getHeight(); y++)
-			{
+	public static void addColorBorder(BufferedImage img, int pxls, Color c) {
+		for (int x = 0; x < img.getWidth(); x++) {
+			for (int y = 0; y < img.getHeight(); y++) {
 				boolean xSide = (x < pxls) || x >= (img.getWidth() - pxls);
 				boolean ySide = (y < pxls) || y >= (img.getHeight() - pxls);
-				if (xSide || ySide)
-				{
+				if (xSide || ySide) {
 					img.setRGB(x, y, c.getRGB());
 				}
 			}
@@ -708,106 +606,84 @@ public class ImageOperations
 	}
 
 	/**
-	 * This function can be used to rotate an
-	 * image in 90 degree . The image can be
-	 * rotated in a clockwise or anti-clockwise
-	 * direction. the direction is chosen by
-	 * haveing the rotationAmmount +ve(clockwise)
-	 * or -ve(anti-clockwise). The returned image
-	 * will contain a copy of all the pixel data
-	 * from the orignal image.
+	 * This function can be used to rotate an image in 90 degree . The image can
+	 * be rotated in a clockwise or anti-clockwise direction. the direction is
+	 * chosen by haveing the rotationAmmount +ve(clockwise) or
+	 * -ve(anti-clockwise). The returned image will contain a copy of all the
+	 * pixel data from the orignal image.
 	 * 
 	 * @param image
 	 *            - The image to rotate
 	 * @param rotationType
-	 *            - The number of 90 degree
-	 *            rotations to perform, it should
-	 *            be either 0 (none), +/- 1 (90),
-	 *            +/- 2 (180 or flip), +/- 3
-	 *            (270), +/- 4 (none)
-	 * @return BufferedImage containing the
-	 *         rotated image.
+	 *            - The number of 90 degree rotations to perform, it should be
+	 *            either 0 (none), +/- 1 (90), +/- 2 (180 or flip), +/- 3 (270),
+	 *            +/- 4 (none)
+	 * @return BufferedImage containing the rotated image.
 	 */
-	public static BufferedImage getRotatedImage(BufferedImage image, int rotationAmmount)
-	{
-		if (Math.abs(rotationAmmount) > 4)
-		{
+	public static BufferedImage getRotatedImage(BufferedImage image,
+			int rotationAmmount) {
+		if (Math.abs(rotationAmmount) > 4) {
 			throw new InvalidParameterException(
 					"Number of rotation should be between 0 -> -/+4");
 		}
 		// Check if rotation ammount is 0 and so
 		// return clone of image
-		if (rotationAmmount % 4 == 0)
-		{
+		if (rotationAmmount % 4 == 0) {
 			return cloneImage(image);
-		} else if (rotationAmmount % 2 == 0)
-		{
+		} else if (rotationAmmount % 2 == 0) {
 			return getFlippedImage(image, XY_AXIS);
-		} else
-		{
+		} else {
 			BufferedImage result = new BufferedImage(image.getHeight(),
 					image.getWidth(), image.getType());
-			for (int x = 0; x < image.getWidth(); x++)
-			{
-				for (int y = 0; y < image.getHeight(); y++)
-				{
+			for (int x = 0; x < image.getWidth(); x++) {
+				for (int y = 0; y < image.getHeight(); y++) {
 					result.setRGB(y, x, image.getRGB(x, y));
 				}
 			}
 
-			if (rotationAmmount == 1 || rotationAmmount == -3)
-			{
+			if (rotationAmmount == 1 || rotationAmmount == -3) {
 				flipImage(result, Y_AXIS);
 				return result;
-			} else
-			{
+			} else {
 				flipImage(result, X_AXIS);
 				return result;
 			}
 		}
 	}
 
-	public static void sendImageToClipBoard(Image image)
-	{
+	public static void sendImageToClipBoard(Image image) {
 		ImageSelection imageSelection = new ImageSelection(image);
 		Toolkit.getDefaultToolkit().getSystemClipboard()
 				.setContents(imageSelection, null);
 
 	}
 
-
-	public static BufferedImage getClipBoardImage()
-	{
+	public static BufferedImage getClipBoardImage() {
 		Clipboard clip = Toolkit.getDefaultToolkit().getSystemClipboard();
-		
+
 		Transferable trans = clip.getContents(null);
-		
-		for(int i = 0; i < trans.getTransferDataFlavors().length; i++)
-		{
-			try
-			{
-			System.out.println(trans.getTransferDataFlavors()[i]);
-			Object obj;
-			
+
+		for (int i = 0; i < trans.getTransferDataFlavors().length; i++) {
+			try {
+				System.out.println(trans.getTransferDataFlavors()[i]);
+				Object obj;
+
 				obj = (trans.getTransferData(trans.getTransferDataFlavors()[i]));
-			
-			if(obj instanceof BufferedImage)
-			{
-				return ((BufferedImage)obj);
-			}
-			
-			} catch (Exception e)
-			{
+
+				if (obj instanceof BufferedImage) {
+					return ((BufferedImage) obj);
+				}
+
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} 
+			}
 		}
 		return null;
 
 	}
-	
-	public static void main(String input[]) throws IOException
-	{
+
+	public static void main(String input[]) throws IOException {
 		int wide = 512;
 		int high = 256;
 		BufferedImage imageA = new BufferedImage(wide, high,
@@ -822,62 +698,55 @@ public class ImageOperations
 
 	}
 
-	public static void getRotateRightByte(BufferedImage srcImg, BufferedImage rstImg)
-	{
+	public static void getRotateRightByte(BufferedImage srcImg,
+			BufferedImage rstImg) {
 		byte[] srcData = ImageOperations.image_byte_data(srcImg);
 		byte[] rstData = ImageOperations.image_byte_data(rstImg);
 
-		for (int x = 0; x < srcImg.getWidth(); x++)
-		{
-			for (int y = 0; y < srcImg.getHeight(); y++)
-			{
+		for (int x = 0; x < srcImg.getWidth(); x++) {
+			for (int y = 0; y < srcImg.getHeight(); y++) {
 				rstData[(srcImg.getHeight() - y - 1) + x * srcImg.getHeight()] = srcData[x
 						+ y * srcImg.getWidth()];
 			}
 		}
 	}
 
-	public static void getRotateLeftByte(BufferedImage srcImg, BufferedImage rstImg)
-	{
+	public static void getRotateLeftByte(BufferedImage srcImg,
+			BufferedImage rstImg) {
 		byte[] srcData = ImageOperations.image_byte_data(srcImg);
 		byte[] rstData = ImageOperations.image_byte_data(rstImg);
 
-		for (int x = 0; x < srcImg.getWidth(); x++)
-		{
-			for (int y = 0; y < srcImg.getHeight(); y++)
-			{
+		for (int x = 0; x < srcImg.getWidth(); x++) {
+			for (int y = 0; y < srcImg.getHeight(); y++) {
 				rstData[y + (srcImg.getWidth() - x - 1) * srcImg.getHeight()] = srcData[x
 						+ y * srcImg.getWidth()];
 			}
 		}
 	}
 
-	public static void getFlipLRByte(BufferedImage srcImg, BufferedImage rstImg)
-	{
+	public static void getFlipLRByte(BufferedImage srcImg, BufferedImage rstImg) {
 		byte[] srcData = ImageOperations.image_byte_data(srcImg);
 		byte[] rstData = ImageOperations.image_byte_data(rstImg);
 
-		for (int x = 0; x < srcImg.getWidth(); x++)
-		{
-			for (int y = 0; y < srcImg.getHeight(); y++)
-			{
+		for (int x = 0; x < srcImg.getWidth(); x++) {
+			for (int y = 0; y < srcImg.getHeight(); y++) {
 				rstData[x + y * srcImg.getWidth()] = srcData[x + y
 						* srcImg.getWidth()];
 			}
 		}
 	}
 
-	public static BufferedImage getRotatedImageFull(BufferedImage src, double amount)
-	{
+	public static BufferedImage getRotatedImageFull(BufferedImage src,
+			double amount) {
 		return getRotatedImageFull(src, amount, Color.BLACK);
 	}
 
-	public static BufferedImage getRotatedImageFull(BufferedImage src, double amount, Color background)
-	{
+	public static BufferedImage getRotatedImageFull(BufferedImage src,
+			double amount, Color background) {
 		BufferedImage rst = null;
 
-		AffineTransform tra = AffineTransform.getRotateInstance(amount, src
-				.getWidth() / 2, src.getHeight() / 2);
+		AffineTransform tra = AffineTransform.getRotateInstance(amount,
+				src.getWidth() / 2, src.getHeight() / 2);
 
 		Point2D.Float p1 = new Point2D.Float(0, 0);
 		Point2D.Float p2 = new Point2D.Float(0, src.getHeight());
@@ -888,16 +757,16 @@ public class ImageOperations
 		Point2D.Float[] pDst = new Point2D.Float[4];
 		tra.transform(pSrc, 0, pDst, 0, 4);
 
-		float xRange[] = DataAnalysisToolkit
-				.getRangef(pDst[0].x, pDst[1].x, pDst[2].x, pDst[3].x);
-		float yRange[] = DataAnalysisToolkit
-				.getRangef(pDst[0].y, pDst[1].y, pDst[2].y, pDst[3].y);
+		float xRange[] = DataAnalysisToolkit.getRangef(pDst[0].x, pDst[1].x,
+				pDst[2].x, pDst[3].x);
+		float yRange[] = DataAnalysisToolkit.getRangef(pDst[0].y, pDst[1].y,
+				pDst[2].y, pDst[3].y);
 
 		int wide = (int) (Math.ceil(xRange[1] - xRange[0]));
 		int high = (int) (Math.ceil(yRange[1] - yRange[0]));
 
-		AffineTransform newTra = AffineTransform
-				.getTranslateInstance(-xRange[0], -yRange[0]);
+		AffineTransform newTra = AffineTransform.getTranslateInstance(
+				-xRange[0], -yRange[0]);
 		newTra.concatenate(tra);
 
 		rst = ImageOperations.getBi(wide, high);
@@ -907,51 +776,40 @@ public class ImageOperations
 	}
 
 	/**
-	 * This will convert a rgb value to a gray
-	 * scale value
+	 * This will convert a rgb value to a gray scale value
 	 * 
 	 * @param rgb
 	 * @return
 	 */
-	public static int getGrayScale(int rgb)
-	{
+	public static int getGrayScale(int rgb) {
 		Color c = new Color(rgb);
 		return (c.getRed() + c.getBlue() + c.getGreen()) / 3;
 	}
 
 	/**
-	 * Returns a {@link VolatileImage} with a data
-	 * layout and color model compatible with this
-	 * <code>GraphicsConfiguration</code>. The
-	 * returned <code>VolatileImage</code> may
-	 * have data that is stored optimally for the
-	 * underlying graphics device and may
-	 * therefore benefit from platform-specific
-	 * rendering acceleration.
+	 * Returns a {@link VolatileImage} with a data layout and color model
+	 * compatible with this <code>GraphicsConfiguration</code>. The returned
+	 * <code>VolatileImage</code> may have data that is stored optimally for the
+	 * underlying graphics device and may therefore benefit from
+	 * platform-specific rendering acceleration.
 	 * 
 	 * @param width
-	 *            the width of the returned
-	 *            <code>VolatileImage</code>
+	 *            the width of the returned <code>VolatileImage</code>
 	 * @param height
-	 *            the height of the returned
-	 *            <code>VolatileImage</code>
+	 *            the height of the returned <code>VolatileImage</code>
 	 * @param transparency
 	 *            the specified transparency mode
-	 * @return a <code>VolatileImage</code> whose
-	 *         data layout and color model is
-	 *         compatible with this
-	 *         <code>GraphicsConfiguration</code>.
+	 * @return a <code>VolatileImage</code> whose data layout and color model is
+	 *         compatible with this <code>GraphicsConfiguration</code>.
 	 * @throws IllegalArgumentException
-	 *             if the transparency is not a
-	 *             valid value
+	 *             if the transparency is not a valid value
 	 * @see Transparency#OPAQUE
 	 * @see Transparency#BITMASK
 	 * @see Transparency#TRANSLUCENT
-	 * @see Component#createVolatileImage(int,
-	 *      int)
+	 * @see Component#createVolatileImage(int, int)
 	 */
-	public static VolatileImage createVolatileImage(int width, int height, int transparency)
-	{
+	public static VolatileImage createVolatileImage(int width, int height,
+			int transparency) {
 		GraphicsEnvironment ge = GraphicsEnvironment
 				.getLocalGraphicsEnvironment();
 		GraphicsConfiguration gc = ge.getDefaultScreenDevice()
@@ -962,8 +820,7 @@ public class ImageOperations
 
 		int valid = image.validate(gc);
 
-		if (valid == VolatileImage.IMAGE_INCOMPATIBLE)
-		{
+		if (valid == VolatileImage.IMAGE_INCOMPATIBLE) {
 			image = createVolatileImage(width, height, transparency);
 			return image;
 		}
@@ -972,25 +829,20 @@ public class ImageOperations
 	}
 
 	/**
-	 * This will flip an image around a given
-	 * axes. It will return a new image.
+	 * This will flip an image around a given axes. It will return a new image.
 	 * 
 	 * @param image
 	 * @param axes
-	 *            the axes to flip the image
-	 *            (X_axes or Y_axes)
-	 * @return The resulting image fliped around
-	 *         the given axes
+	 *            the axes to flip the image (X_axes or Y_axes)
+	 * @return The resulting image fliped around the given axes
 	 */
-	public static BufferedImage getFlippedImage(BufferedImage image, int axes)
-	{
+	public static BufferedImage getFlippedImage(BufferedImage image, int axes) {
 		BufferedImage result = getSameSizeImage(image);
 		flipImage(result, axes);
 		return result;
 	}
 
-	public static Color intropolateColor(Color c1, Color c2, double fract)
-	{
+	public static Color intropolateColor(Color c1, Color c2, double fract) {
 		int red = (int) (c1.getRed() + fract * (c2.getRed() - c1.getRed()));
 		int green = (int) (c1.getGreen() + fract
 				* (c2.getGreen() - c1.getGreen()));
@@ -999,40 +851,32 @@ public class ImageOperations
 		return new Color(red, green, blue);
 	}
 
-	public static void flipImage(BufferedImage image, int axes)
-	{
-		if (axes == X_AXIS)
-		{
+	public static void flipImage(BufferedImage image, int axes) {
+		if (axes == X_AXIS) {
 			int tmpRGB;
-			for (int x = 0; x < image.getWidth(); x++)
-			{
-				for (int y = 0; y < image.getHeight() / 2; y++)
-				{
+			for (int x = 0; x < image.getWidth(); x++) {
+				for (int y = 0; y < image.getHeight() / 2; y++) {
 					tmpRGB = image.getRGB(x, y);
-					image.setRGB(x, y, image.getRGB(x, image.getHeight() - y
-							- 1));
+					image.setRGB(x, y,
+							image.getRGB(x, image.getHeight() - y - 1));
 					image.setRGB(x, image.getHeight() - y - 1, tmpRGB);
 
 				}
 			}
-		} else if (axes == Y_AXIS)
-		{
+		} else if (axes == Y_AXIS) {
 			int tmpRGB;
-			for (int x = 0; x < image.getWidth() / 2; x++)
-			{
-				for (int y = 0; y < image.getHeight(); y++)
-				{
+			for (int x = 0; x < image.getWidth() / 2; x++) {
+				for (int y = 0; y < image.getHeight(); y++) {
 					tmpRGB = image.getRGB(x, y);
-					image.setRGB(x, y, image.getRGB(image.getWidth() - x - 1, y));
+					image.setRGB(x, y,
+							image.getRGB(image.getWidth() - x - 1, y));
 					image.setRGB(image.getWidth() - x - 1, y, tmpRGB);
 				}
 			}
-		} else if (axes == XY_AXIS)
-		{
+		} else if (axes == XY_AXIS) {
 			flipImage(image, X_AXIS);
 			flipImage(image, Y_AXIS);
-		} else
-		{
+		} else {
 			throw new InvalidParameterException("No Valid axes selected");
 		}
 	}
@@ -1042,32 +886,26 @@ public class ImageOperations
 	 * 
 	 * @return a random chosen color
 	 */
-	public static Color getRandomColor()
-	{
+	public static Color getRandomColor() {
 		return new Color((int) (Math.random() * 255),
 				(int) (Math.random() * 255), (int) (Math.random() * 255));
 	}
 
-	public static BufferedImage getGrayScale(BufferedImage source)
-	{
+	public static BufferedImage getGrayScale(BufferedImage source) {
 		BufferedImage result = new BufferedImage(source.getWidth(),
 				source.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		getGrayScale(source, result);
 		return result;
 	}
 
-	public static void getGrayScale(BufferedImage source, BufferedImage result)
-	{
+	public static void getGrayScale(BufferedImage source, BufferedImage result) {
 		if (source.getWidth() != result.getWidth()
-				|| source.getHeight() != result.getHeight())
-		{
+				|| source.getHeight() != result.getHeight()) {
 			throw new InvalidParameterException(
 					"Images must have same dimensions");
 		}
-		for (int x = 0; x < source.getWidth(); x++)
-		{
-			for (int y = 0; y < source.getHeight(); y++)
-			{
+		for (int x = 0; x < source.getWidth(); x++) {
+			for (int y = 0; y < source.getHeight(); y++) {
 				Color oC = new Color(source.getRGB(x, y));
 				int pxl = (oC.getRed() + oC.getGreen() + oC.getBlue()) / 3;
 				Color newColor = new Color(pxl, pxl, pxl);
@@ -1077,49 +915,42 @@ public class ImageOperations
 	}
 
 	/**
-	 * This class will create a gray scaled image
-	 * that contains a gray gradient across the
-	 * image.
+	 * This class will create a gray scaled image that contains a gray gradient
+	 * across the image.
 	 * 
 	 * @param width
 	 * @param height
 	 * @param freq
 	 * @return
 	 */
-	public static BufferedImage getGrayTestImage(int width, int height, int freq)
-	{
+	public static BufferedImage getGrayTestImage(int width, int height, int freq) {
 		return getGrayTestImage(width, height, freq, X_AXIS);
 	}
 
-	public static void getResizeImage(BufferedImage src, BufferedImage result)
-	{
+	public static void getResizeImage(BufferedImage src, BufferedImage result) {
 		getResizeImage(src, result, true, false);
 	}
 
 	/**
-	 * This function will resize the src image to
-	 * be drawn into the results image
+	 * This function will resize the src image to be drawn into the results
+	 * image
 	 * 
 	 * @param src
 	 * @param result
 	 */
-	public static void getResizeImage(BufferedImage src, BufferedImage result, boolean hightRes, boolean blurFirst)
-	{
+	public static void getResizeImage(BufferedImage src, BufferedImage result,
+			boolean hightRes, boolean blurFirst) {
 		Graphics2D g = result.createGraphics();
-		if (blurFirst)
-		{
-			try
-			{
+		if (blurFirst) {
+			try {
 				src = blurImage(src);
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				System.out.println("The blur in image resize did not work :"
 						+ e.getLocalizedMessage());
 				e.printStackTrace();
 			}
 		}
-		if (hightRes)
-		{
+		if (hightRes) {
 			GraphicsToolkit
 					.setRenderingQuality(g, GraphicsToolkit.HIGH_QUALITY);
 		}
@@ -1127,8 +958,7 @@ public class ImageOperations
 		g.dispose();
 	}
 
-	public static BufferedImage blurImage(BufferedImage image)
-	{
+	public static BufferedImage blurImage(BufferedImage image) {
 		float ninth = 1.0f / 9.0f;
 		float[] blurKernel = { ninth, ninth, ninth, ninth, ninth, ninth, ninth,
 				ninth, ninth };
@@ -1141,21 +971,21 @@ public class ImageOperations
 		return op.filter(image, null);
 	}
 
-	public static BufferedImage getScaledImage(BufferedImage src, double scale)
-	{
+	public static BufferedImage getScaledImage(BufferedImage src, double scale) {
 		return getScaledImage(src, scale, false, false);
 	}
 
-	public static BufferedImage getScaledImage(BufferedImage src, double scale, boolean highres, boolean blur)
-	{
+	public static BufferedImage getScaledImage(BufferedImage src, double scale,
+			boolean highres, boolean blur) {
 		BufferedImage rst = ImageOperations
-				.getBi((int) (src.getWidth() * scale), (int) (src.getHeight() * scale));
+				.getBi((int) (src.getWidth() * scale),
+						(int) (src.getHeight() * scale));
 		getResizeImage(src, rst, highres, blur);
 		return rst;
 	}
 
-	public static BufferedImage getScaledFitImage(BufferedImage src, int sizeX, int sizeY, boolean highres, boolean blur)
-	{
+	public static BufferedImage getScaledFitImage(BufferedImage src, int sizeX,
+			int sizeY, boolean highres, boolean blur) {
 		BufferedImage rst = new BufferedImage(sizeX, sizeY,
 				BufferedImage.TYPE_4BYTE_ABGR);
 
@@ -1168,11 +998,9 @@ public class ImageOperations
 		double scaleY = sizeY / (double) src.getHeight();
 
 		double scale = 1;
-		if (scaleX > scaleY)
-		{
+		if (scaleX > scaleY) {
 			scale = scaleY;
-		} else
-		{
+		} else {
 			scale = scaleX;
 		}
 		double sX = (src.getWidth() * scale);
@@ -1189,32 +1017,28 @@ public class ImageOperations
 		ImageOperations.setImage(new Color(1, 1, 1, 0), rst);
 
 		Graphics2D g2 = rst.createGraphics();
-		if (highres)
-		{
-			GraphicsToolkit
-					.setRenderingQuality(g2, GraphicsToolkit.HIGH_QUALITY);
+		if (highres) {
+			GraphicsToolkit.setRenderingQuality(g2,
+					GraphicsToolkit.HIGH_QUALITY);
 		}
 		g2.drawImage(src, x1, y1, x2 - x1, y2 - y1, null);
 
 		return rst;
 	}
 
-	public static BufferedImage getGrayTestImage(int width, int height, int freq, int axis)
-	{
+	public static BufferedImage getGrayTestImage(int width, int height,
+			int freq, int axis) {
 		BufferedImage image = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_ARGB);
 
 		GradientPaint gradient;
-		if (axis == X_AXIS)
-		{
+		if (axis == X_AXIS) {
 			gradient = new GradientPaint(0, 0, Color.BLACK, width / freq, 0,
 					Color.WHITE, true);
-		} else if (axis == Y_AXIS)
-		{
+		} else if (axis == Y_AXIS) {
 			gradient = new GradientPaint(0, 0, new Color(255, 255, 255), 0,
 					height / freq, new Color(0, 0, 0), true);
-		} else
-		{
+		} else {
 			throw new InvalidParameterException("Invalid axis selected");
 		}
 
@@ -1225,44 +1049,35 @@ public class ImageOperations
 		return image;
 	}
 
-	public static BufferedImage getBi(Dimension d)
-	{
+	public static BufferedImage getBi(Dimension d) {
 		return getBi(d.width, d.height);
 	}
 
-	public static BufferedImage getBi(int size)
-	{
+	public static BufferedImage getBi(int size) {
 		return getBi(size, size);
 	}
 
-	public static BufferedImage getBi(int wide, int high)
-	{
-		if (wide <= 0)
-		{
+	public static BufferedImage getBi(int wide, int high) {
+		if (wide <= 0) {
 			wide = 1;
 		}
-		if (high <= 0)
-		{
+		if (high <= 0) {
 			high = 1;
 		}
 		return new BufferedImage(wide, high, BufferedImage.TYPE_INT_RGB);
 	}
 
-	public static BufferedImage cloneImage(BufferedImage image)
-	{
+	public static BufferedImage cloneImage(BufferedImage image) {
 		int type = 0;
-		if (image.getType() != BufferedImage.TYPE_CUSTOM)
-		{
+		if (image.getType() != BufferedImage.TYPE_CUSTOM) {
 			type = image.getType();
-		} else
-		{
+		} else {
 			type = BufferedImage.TYPE_4BYTE_ABGR;
 		}
 		return cloneImage(image, type);
 	}
 
-	public static BufferedImage cloneImage(BufferedImage image, int type)
-	{
+	public static BufferedImage cloneImage(BufferedImage image, int type) {
 		BufferedImage result = new BufferedImage(image.getWidth(),
 				image.getHeight(), type);
 
@@ -1270,47 +1085,40 @@ public class ImageOperations
 		return result;
 	}
 
-	public static BufferedImage cloneImage(BufferedImage image, Color bg, float alpha)
-	{
+	public static BufferedImage cloneImage(BufferedImage image, Color bg,
+			float alpha) {
 		BufferedImage result = new BufferedImage(image.getWidth(),
 				image.getHeight(), image.getType());
 		setImage(bg, result);
 		Graphics2D g = result.createGraphics();
-		g.setComposite(AlphaComposite
-				.getInstance(AlphaComposite.SRC_OVER, alpha));
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				alpha));
 		g.drawImage(image, 0, 0, null);
 		return result;
 	}
 
-	public static BufferedImage getSameSizeImage(BufferedImage image)
-	{
+	public static BufferedImage getSameSizeImage(BufferedImage image) {
 		BufferedImage result;
-		try
-		{
+		try {
 			result = new BufferedImage(image.getWidth(), image.getHeight(),
 					image.getType());
-		} catch (IllegalArgumentException e)
-		{
+		} catch (IllegalArgumentException e) {
 			result = new BufferedImage(image.getWidth(), image.getHeight(),
 					BufferedImage.TYPE_INT_ARGB);
 		}
 		/**
-		 * Removed Drawing of imaged as it was
-		 * wasiting time
+		 * Removed Drawing of imaged as it was wasiting time
 		 */
 		return result;
 	}
 
-	public static BufferedImage loadImage(File file)
-	{
+	public static BufferedImage loadImage(File file) {
 
-		try
-		{
+		try {
 
 			return ImageOperations.cloneImage(ImageIO.read(file));
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new IllegalArgumentException(
 					"The file appears to be an invalid image :\n"
 							+ e.getMessage());
@@ -1319,55 +1127,46 @@ public class ImageOperations
 	}
 
 	/**
-	 * This allows you to set the color of an
-	 * image. It just fill the image with the
-	 * chosen color.
+	 * This allows you to set the color of an image. It just fill the image with
+	 * the chosen color.
 	 * 
 	 * @param Color
 	 *            - Color to fill image
 	 * @param image
-	 *            BufferedImage - The image to be
-	 *            colored
+	 *            BufferedImage - The image to be colored
 	 */
-	public static void setImage(Color c, BufferedImage image)
-	{
+	public static void setImage(Color c, BufferedImage image) {
 		Graphics g = image.getGraphics();
 		g.setColor(c);
 		g.fillRect(0, 0, image.getWidth(), image.getHeight());
 		g.dispose();
 	}
 
-	public static void setImageColor(Color c, BufferedImage image)
-	{
-		for (int x = 0; x < image.getWidth(); x++)
-		{
-			for (int y = 0; y < image.getHeight(); y++)
-			{
+	public static void setImageColor(Color c, BufferedImage image) {
+		for (int x = 0; x < image.getWidth(); x++) {
+			for (int y = 0; y < image.getHeight(); y++) {
 				image.setRGB(x, y, c.getRGB());
 			}
 		}
 	}
 
 	/**
-	 * This will fill an image with random colored
-	 * squares. it will break it up into numWide X
-	 * numHigh squares.
+	 * This will fill an image with random colored squares. it will break it up
+	 * into numWide X numHigh squares.
 	 * 
 	 * @param numWide
 	 * @param numHigh
 	 * @param image
 	 */
-	public static void fillWithRandomColorSquares(int numWide, int numHigh, Image image)
-	{
+	public static void fillWithRandomColorSquares(int numWide, int numHigh,
+			Image image) {
 		// Calculate the dimension of the squares
 		// in pixels
 		int wide = image.getWidth(null) / numWide;
 		int high = image.getHeight(null) / numHigh;
 
-		for (int i = 0; i < numWide; i++)
-		{
-			for (int j = 0; j < numHigh; j++)
-			{
+		for (int i = 0; i < numWide; i++) {
+			for (int j = 0; j < numHigh; j++) {
 				Graphics g = image.getGraphics();
 				g.setColor(getRandomColor());
 				g.fillRect(i * wide, j * high, wide, high);
@@ -1377,8 +1176,7 @@ public class ImageOperations
 	}
 
 	/**
-	 * The next two mehtds where got from
-	 * http://javaalmanac
+	 * The next two mehtds where got from http://javaalmanac
 	 * .com/egs/java.awt.image/HasAlpha.html T
 	 * 
 	 * @param image
@@ -1386,12 +1184,10 @@ public class ImageOperations
 	 */
 	// This method returns true if the specified
 	// image has transparent pixels
-	public static boolean hasAlpha(Image image)
-	{
+	public static boolean hasAlpha(Image image) {
 		// If buffered image, the color model is
 		// readily available
-		if (image instanceof BufferedImage)
-		{
+		if (image instanceof BufferedImage) {
 			BufferedImage bimage = (BufferedImage) image;
 			return bimage.getColorModel().hasAlpha();
 		}
@@ -1401,11 +1197,9 @@ public class ImageOperations
 		// grabbing a single pixel is usually
 		// sufficient
 		PixelGrabber pg = new PixelGrabber(image, 0, 0, 1, 1, false);
-		try
-		{
+		try {
 			pg.grabPixels();
-		} catch (InterruptedException e)
-		{
+		} catch (InterruptedException e) {
 		}
 
 		// Get the image's color model
@@ -1414,18 +1208,14 @@ public class ImageOperations
 	}
 
 	/**
-	 * This method returns a buffered image with
-	 * the contents of an image
+	 * This method returns a buffered image with the contents of an image
 	 * 
 	 * @param image
-	 *            Image - The image to be turend
-	 *            into a BufferedImage
+	 *            Image - The image to be turend into a BufferedImage
 	 */
 	public static BufferedImage toBufferedImage(Image image)
-			throws IllegalArgumentException
-	{
-		if (image instanceof BufferedImage)
-		{
+			throws IllegalArgumentException {
+		if (image instanceof BufferedImage) {
 			return (BufferedImage) image;
 		}
 
@@ -1446,33 +1236,28 @@ public class ImageOperations
 		BufferedImage bimage = null;
 		GraphicsEnvironment ge = GraphicsEnvironment
 				.getLocalGraphicsEnvironment();
-		try
-		{
+		try {
 			// Determine the type of transparency
 			// of the new buffered image
 			int transparency = Transparency.OPAQUE;
-			if (hasAlpha)
-			{
+			if (hasAlpha) {
 				transparency = Transparency.BITMASK;
 			}
 
 			// Create the buffered image
 			GraphicsDevice gs = ge.getDefaultScreenDevice();
 			GraphicsConfiguration gc = gs.getDefaultConfiguration();
-			bimage = gc.createCompatibleImage(image.getWidth(null), image
-					.getHeight(null), transparency);
-		} catch (HeadlessException e)
-		{
+			bimage = gc.createCompatibleImage(image.getWidth(null),
+					image.getHeight(null), transparency);
+		} catch (HeadlessException e) {
 			// The system does not have a screen
 		}
 
-		if (bimage == null)
-		{
+		if (bimage == null) {
 			// Create a buffered image using the
 			// default color model
 			int type = BufferedImage.TYPE_INT_RGB;
-			if (hasAlpha)
-			{
+			if (hasAlpha) {
 				type = BufferedImage.TYPE_INT_ARGB;
 			}
 			bimage = new BufferedImage(image.getWidth(null),
@@ -1490,55 +1275,45 @@ public class ImageOperations
 	}
 
 	/**
-	 * This is a function that will calculate the
-	 * average color of a section of an image
-	 * image
+	 * This is a function that will calculate the average color of a section of
+	 * an image image
 	 * 
 	 * @param BufferedImage
-	 *            the image to get the average
-	 *            color
-	 * @return Rectangle the area of the image to
-	 *         get Average of
+	 *            the image to get the average color
+	 * @return Rectangle the area of the image to get Average of
 	 */
-	public static Color getAverageColor(BufferedImage image, Rectangle area)
-	{
+	public static Color getAverageColor(BufferedImage image, Rectangle area) {
 		// Color tempColor;
 		int red = 0, green = 0, blue = 0;
 		int colorVal = 0;
 		int loopCount = 0;
 		loopCount = 0;
 		// Loop over the image and get each p
-		for (int x = area.x; x < area.x + area.width; x++)
-		{
-			for (int y = area.y; y < area.y + area.height; y++)
-			{
+		for (int x = area.x; x < area.x + area.width; x++) {
+			for (int y = area.y; y < area.y + area.height; y++) {
 				/*
-				 * tempColor = new
-				 * Color(image.getRGB(x, y));
+				 * tempColor = new Color(image.getRGB(x, y));
 				 * 
-				 * red += tempColor.getRed(); blue
-				 * += tempColor.getBlue(); green
+				 * red += tempColor.getRed(); blue += tempColor.getBlue(); green
 				 * += tempColor.getGreen();
 				 */
-				try
-				{
+				try {
 					Color c = new Color(image.getRGB(x, y));
 					red += c.getRed();
 					green += c.getGreen();
 					blue += c.getBlue();
 					loopCount++;
-				} catch (ArrayIndexOutOfBoundsException e)
-				{
+				} catch (ArrayIndexOutOfBoundsException e) {
 					System.out.print("\n");
 					e.printStackTrace();
-					System.out
-							.printf("\nImageSize[%d,%d,] Area[%d,%d,%d,%d] out[%d,%d]", image
-									.getWidth(), image.getHeight(), area.x, area.y, area.width, area.height, x, y);
+					System.out.printf(
+							"\nImageSize[%d,%d,] Area[%d,%d,%d,%d] out[%d,%d]",
+							image.getWidth(), image.getHeight(), area.x,
+							area.y, area.width, area.height, x, y);
 				}
 			}
 		}
-		if (loopCount == 0)
-		{
+		if (loopCount == 0) {
 			loopCount = 1;
 		}
 		red /= loopCount;
@@ -1552,8 +1327,7 @@ public class ImageOperations
 	 * @param image
 	 * @return
 	 */
-	public static Color getAverageColor(BufferedImage image)
-	{
+	public static Color getAverageColor(BufferedImage image) {
 		return getAverageColor(image, new Rectangle(0, 0, image.getWidth(),
 				image.getHeight()));
 	}
@@ -1564,8 +1338,8 @@ public class ImageOperations
 	 * @param region
 	 * @return
 	 */
-	public static BufferedImage maskImage(BufferedImage image, Shape region, Color clipedColor)
-	{
+	public static BufferedImage maskImage(BufferedImage image, Shape region,
+			Color clipedColor) {
 		BufferedImage result = new BufferedImage(image.getWidth(),
 				image.getHeight(), image.getType());
 		maskImage(image, result, region, clipedColor);
@@ -1573,19 +1347,17 @@ public class ImageOperations
 	}
 
 	/**
-	 * This will create a cliped image of the
-	 * given Shape from the sourceData into the
-	 * resultData. IT will set all others areas to
-	 * the cliped color ( area outside the shape
-	 * of the region
+	 * This will create a cliped image of the given Shape from the sourceData
+	 * into the resultData. IT will set all others areas to the cliped color (
+	 * area outside the shape of the region
 	 * 
 	 * @param sourceData
 	 * @param result
 	 * @param region
 	 * @param clipedColor
 	 */
-	public static void maskImage(BufferedImage sourceData, BufferedImage result, Shape region, Color clipedColor)
-	{
+	public static void maskImage(BufferedImage sourceData,
+			BufferedImage result, Shape region, Color clipedColor) {
 		ImageOperations.setImage(clipedColor, result);
 		Graphics2D g = result.createGraphics();
 		g.setClip(region);
@@ -1593,13 +1365,11 @@ public class ImageOperations
 		g.dispose();
 	}
 
-	public static BufferedImage cropImage(BufferedImage src, Rectangle region)
-	{
+	public static BufferedImage cropImage(BufferedImage src, Rectangle region) {
 		return src.getSubimage(region.x, region.y, region.width, region.height);
 	}
 
-	public static void fillRegion(BufferedImage image, Rectangle region, Color c)
-	{
+	public static void fillRegion(BufferedImage image, Rectangle region, Color c) {
 		Graphics2D g = image.createGraphics();
 		g.setColor(c);
 		g.fill(region);
@@ -1607,50 +1377,49 @@ public class ImageOperations
 	}
 
 	/**
-	 * This function just calls ImageIO.write but
-	 * passes the file extends depending on the
-	 * output file
+	 * This function just calls ImageIO.write but passes the file extends
+	 * depending on the output file
 	 * 
 	 * @param src
 	 * @param outputFile
 	 * @throws IOException
 	 */
 	public static void saveImage(BufferedImage img, File outputFile)
-			throws IOException
-	{
+			throws IOException {
 		String ext = FileOperations.splitFile(outputFile)[2];
 		ImageIO.write(img, ext, outputFile);
 	}
 
 	/**
-	 * This function just calls ImageIO.write but
-	 * passes the file extends depending on the
-	 * output file
+	 * This function just calls ImageIO.write but passes the file extends
+	 * depending on the output file
 	 * 
 	 * @param src
 	 * @param outputFile
 	 * @throws IOException
 	 */
 	public static void saveImage(BufferedImage img, String outputFile)
-			throws IOException
-	{
+			throws IOException {
 		saveImage(img, new File(outputFile));
 	}
 
-	public static void printPlanes(Color c1)
-	{
-		System.out.printf("Color RGBA[%d,%d,%d,%d]\t", c1.getRed(), c1.getBlue(), c1.getGreen(), c1.getAlpha());
-		System.out.printf("Gy[%d]\tR[%d]\tG[%d]\tB[%d]\tA[%d]\n", 
+	public static void printPlanes(Color c1) {
+		System.out.printf("Color RGBA[%d,%d,%d,%d]\t", c1.getRed(),
+				c1.getBlue(), c1.getGreen(), c1.getAlpha());
+		System.out.printf("Gy[%d]\tR[%d]\tG[%d]\tB[%d]\tA[%d]\n",
 				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_GRAY),
 				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_RED),
 				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_GREEN),
-				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_BLUE),ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_ALPHA));
-		System.out.printf("Color RGBA[%d,%d,%d,%d]\n", c1.getRed(), c1.getBlue(), c1.getGreen(), c1.getAlpha());
-		System.out.printf("Color RGBA[%d,%d,%d,%d]\n", c1.getRed(), c1.getBlue(), c1.getGreen(), c1.getAlpha());
+				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_BLUE),
+				ImageOperations.getPlaneFromRGBA(c1.getRGB(), PLANE_ALPHA));
+		System.out.printf("Color RGBA[%d,%d,%d,%d]\n", c1.getRed(),
+				c1.getBlue(), c1.getGreen(), c1.getAlpha());
+		System.out.printf("Color RGBA[%d,%d,%d,%d]\n", c1.getRed(),
+				c1.getBlue(), c1.getGreen(), c1.getAlpha());
 	}
 
-	public static BufferedImage getScaledFitImage(BufferedImage imgData, int sizeX, int sizeY)
-	{
+	public static BufferedImage getScaledFitImage(BufferedImage imgData,
+			int sizeX, int sizeY) {
 		return getScaledFitImage(imgData, sizeX, sizeY, true, true);
 	}
 }
