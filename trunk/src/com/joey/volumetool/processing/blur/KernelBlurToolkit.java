@@ -4,10 +4,143 @@ import com.joey.volumetool.data.ByteDataset;
 import com.joey.volumetool.data.Dataset;
 import com.joey.volumetool.data.FloatDataset;
 import com.joey.volumetool.data.IntegerDataset;
+import com.joey.volumetool.data.Point4D;
 import com.joey.volumetool.data.ShortDataset;
 
 public class KernelBlurToolkit{
 
+	public static float getBlurData(Dataset input, Point4D ker,Point4D p ){
+		float val = 0;
+		int count = 0;
+		
+		//Perform Calculation
+		for(int tP = -ker.t; tP < ker.t; tP++){
+			for (int xP = -ker.x; xP < ker.x; xP++) {
+				for (int yP = -ker.y; yP < ker.y; yP++) {
+					for (int zP = -ker.z; zP < ker.z; zP++) {
+						if (xP >= 0 && yP >= 0 && zP >= 0 && tP >= 0 && tP < input.getSizeT() && xP < input.getSizeX() && yP < input.getSizeY() && zP < input.getSizeZ()) {
+							val += input.getValue(xP, yP, zP, tP);
+							count++;
+						}
+					}
+				}
+			}
+		}
+		
+		if(count != 0){
+			val/=count;
+		}
+		return val;
+	}
+	
+	public static float getBlurData(FloatDataset input, Point4D ker,Point4D p ){
+		float val = 0;
+		int count = 0;
+		
+		//Perform Calculation
+		for(int tP = -ker.t; tP < ker.t; tP++){
+			for (int xP = -ker.x; xP < ker.x; xP++) {
+				for (int yP = -ker.y; yP < ker.y; yP++) {
+					for (int zP = -ker.z; zP < ker.z; zP++) {
+						if (xP >= 0 && yP >= 0 && zP >= 0 && tP >= 0 && tP < input.getSizeT() && xP < input.getSizeX() && yP < input.getSizeY() && zP < input.getSizeZ()) {
+							val += input.data[tP][zP][xP][zP];
+							count++;
+						}
+					}
+				}
+			}
+		}
+		
+		if(count != 0){
+			val/=count;
+		}
+		return val;
+	}
+	
+	public static int getBlurData(IntegerDataset input, Point4D ker,Point4D p){
+		float val = 0;
+		int count = 0;
+		
+		//Perform Calculation
+		for(int tP = -ker.t; tP < ker.t; tP++){
+			for (int xP = -ker.x; xP < ker.x; xP++) {
+				for (int yP = -ker.y; yP < ker.y; yP++) {
+					for (int zP = -ker.z; zP < ker.z; zP++) {
+						if (xP >= 0 && yP >= 0 && zP >= 0 && tP >= 0 && tP < input.getSizeT() && xP < input.getSizeX() && yP < input.getSizeY() && zP < input.getSizeZ()) {
+							val += input.data[tP][zP][xP][zP];
+							count++;
+						}
+					}
+				}
+			}
+		}
+		
+		if(count != 0){
+			val/=count;
+		}
+		return (int)val;
+	}
+	
+	public static short getBlurData(ShortDataset input, Point4D ker,Point4D p ){
+		float val = 0;
+		int count = 0;
+		
+		//Perform Calculation
+		for(int tP = -ker.t; tP < ker.t; tP++){
+			for (int xP = -ker.x; xP < ker.x; xP++) {
+				for (int yP = -ker.y; yP < ker.y; yP++) {
+					for (int zP = -ker.z; zP < ker.z; zP++) {
+						if (xP >= 0 && yP >= 0 && zP >= 0 && tP >= 0 && tP < input.getSizeT() && xP < input.getSizeX() && yP < input.getSizeY() && zP < input.getSizeZ()) {
+							val += input.data[tP][zP][xP][zP];
+							count++;
+						}
+					}
+				}
+			}
+		}
+		
+		if(count != 0){
+			val/=count;
+		}
+		return (short)val;
+	}
+	
+	public static byte getBlurData(ByteDataset input, Point4D ker,Point4D p ){
+		float val = 0;
+		int count = 0;
+		
+		//Perform Calculation
+		for(int tP = -ker.t; tP < ker.t; tP++){
+			for (int xP = -ker.x; xP < ker.x; xP++) {
+				for (int yP = -ker.y; yP < ker.y; yP++) {
+					for (int zP = -ker.z; zP < ker.z; zP++) {
+						if (xP >= 0 && yP >= 0 && zP >= 0 && tP >= 0 && tP < input.getSizeT() && xP < input.getSizeX() && yP < input.getSizeY() && zP < input.getSizeZ()) {
+							val += input.data[tP][zP][xP][zP];
+							count++;
+						}
+					}
+				}
+			}
+		}
+		
+		if(count != 0){
+			val/=count;
+		}
+		return (byte)val;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void blurData(Dataset input, Dataset output, int kerX, int kerY, int kerZ, int kerT) { 	
 		float val = 0;
 		int xP,yP,zP,tP,count = 0;

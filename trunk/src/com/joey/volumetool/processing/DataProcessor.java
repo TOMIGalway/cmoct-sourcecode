@@ -1,6 +1,7 @@
 package com.joey.volumetool.processing;
 
 import com.joey.volumetool.data.Dataset;
+import com.joey.volumetool.data.Point4D;
 
 public abstract class DataProcessor implements Runnable {
 	public static final int PROCESSOR_WAITING = 0;
@@ -8,8 +9,8 @@ public abstract class DataProcessor implements Runnable {
 	public static final int PROCESSOR_COMPLETE = 2;
 	public static final int PROCESSOR_FAILED = 3;
 	
-	Dataset input;
-	Dataset output;
+	protected Dataset input;
+	protected Dataset output;
 	
 	float progress = 0;
 	long start = 0;
@@ -34,7 +35,20 @@ public abstract class DataProcessor implements Runnable {
 		this.output = output;
 	}
 
-	public abstract void processData();
+	public abstract void processDataValue(Point4D p);
+	
+	public void processData(){
+		Point4D p = new Point4D();
+		for(p.t = 0; p.t < input.getSizeT();p.t++){
+			for(p.x = 0; p.x < input.getSizeX();p.x++){
+				for(p.y = 0; p.y < input.getSizeY();p.y++){
+					for(p.z = 0; p.z < input.getSizeZ();p.z++){
+						processDataValue(p);
+					}	
+				}	
+			}	
+		}
+	}
 	
 	public void updateProgress(float progress){
 		this.progress = progress;
