@@ -714,7 +714,7 @@ public class CrossCorrProgram extends JPanel
 			UnsupportedLookAndFeelException, IOException, InterruptedException
 	{
 
-//		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		
 		//testValid();

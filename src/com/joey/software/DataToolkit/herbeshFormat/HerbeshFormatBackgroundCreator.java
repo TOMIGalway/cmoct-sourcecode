@@ -62,7 +62,7 @@ public class HerbeshFormatBackgroundCreator extends JPanel
 		in.close();
 	}
 	
-	
+	/*
 	@Override
 	public BufferedImage getImage(int pos) throws IOException
 	{
@@ -92,5 +92,5 @@ public class HerbeshFormatBackgroundCreator extends JPanel
 			}
 		}	
 		return null;
-	}
+	}*/
 }

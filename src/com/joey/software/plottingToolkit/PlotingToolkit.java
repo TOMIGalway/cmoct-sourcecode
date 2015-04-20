@@ -17,6 +17,7 @@ import java.security.InvalidParameterException;
 import javax.swing.JPanel;
 
 
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -372,6 +373,12 @@ public class PlotingToolkit
 		JFreeChart chart = getPlot(yData, title, xlabel, ylabel);
 		ChartPanel panel = new ChartPanel(chart);
 		return panel;
+	}
+
+	public static JFreeChart getPlot(float[][] fs, String[] strings,
+			String string, String string2, String string3) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

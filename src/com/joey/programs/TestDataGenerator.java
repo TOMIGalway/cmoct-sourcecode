@@ -1,11 +1,12 @@
 package com.joey.programs;
 
 public class TestDataGenerator {
+	/*
 	public static void main(String input[]){
 		/*
 		 * This will create a test dataset consisting of a 3d sphere with varying color towards
 		 * the center and simulate a set of vessels in the middle of the sphere
-		 */
+		 
 		
 		int sizeX=256;
 		int sizeY=256;
@@ -25,5 +26,5 @@ public class TestDataGenerator {
 			}
 		}
 		
-	}
+	}*/
 }
